@@ -1,28 +1,34 @@
 "use client";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import PreLoader from "@/components/PreLoader/PreLoader";
+
+let hasInitialLoaded = false;
 
 export default function Hero() {
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    gsap.fromTo(
-      ".title",
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1 }
-    );
+    if (!hasInitialLoaded) {
+      setIsLoading(true);
+
+      const loadingTimer = setTimeout(() => {
+        document.body.style.cursor = "default";
+        window.scrollTo(0, 0);
+        setIsLoading(false);
+        hasInitialLoaded = true; // Mark as loaded for future navigations
+      }, 5000);
+
+      return () => clearTimeout(loadingTimer);
+    }
   }, []);
 
   return (
-    <section className="h-screen flex flex-col justify-center items-center text-red-500">
-      <motion.h1
-        className="title text-5xl font-bold uppercase"
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        index
-      </motion.h1>
-      <a className="text-[4rem]">adasdasdasdadasdasdasdawdsadsad</a>
-    </section>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <PreLoader key="preloader" />}
+      </AnimatePresence>
+    </>
   );
 }

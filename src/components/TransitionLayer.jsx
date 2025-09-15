@@ -170,7 +170,6 @@ export default function TransitionLayer() {
               `translate(${nx}, ${ny}) scale(${s})`
             );
 
-            // Fade the backdrop only when not initial (initial = 0 stays 0)
             if (!initial) {
               const fade = Math.min(0.28, p * 0.5);
               gsap.set(bg, { opacity: 0.28 - fade });
@@ -179,7 +178,6 @@ export default function TransitionLayer() {
           onComplete() {
             gsap.set(host, { display: "none" });
             gsap.set(bg, { display: "none" });
-            // Reset overlay for next use
             gsap.set(overlay, {
               display: "block",
               scaleY: 0,
@@ -192,7 +190,6 @@ export default function TransitionLayer() {
     });
   };
 
-  // Overlay sweep + logo → navigate (overlay stays UP; mask will take over next page)
   const runPageTransition = async (href) => {
     const overlay = q(".transition-overlay");
     const logo = q(".transition-logo");
@@ -204,28 +201,34 @@ export default function TransitionLayer() {
 
     tl.set(overlay, { display: "block", transformOrigin: "bottom" })
       .to(overlay, { scaleY: 1, duration: 0.55 }) // keep covered
-      .set(logo, { opacity: 1, top: "120%" }, "<")
-      .to(logo, { top: "50%", duration: 0.55 }, "<0.05")
+      .set(logo, { autoAlpha: 1, top: "120%" }, "<")
+      .to(logo, { top: "50%", opacity: 1, duration: 0.55 }, "<0.05")
       .to(logo, {
         scale: bigScale,
+        opacity: 0,
         duration: 0.6,
         ease: "power2.in",
         onStart: () => {
           setIsNavigating(true);
           router.push(href);
         },
+        onComplete: () => {
+          gsap.set(overlay, { display: "none", scaleY: 0 });
+          gsap.set(logo, { autoAlpha: 0, top: "120%", scale: 1 });
+        },
       });
   };
+
   useEffect(() => {
     const overlay = q(".transition-overlay");
     const logo = q(".transition-logo");
     if (overlay && logo) {
       gsap.set(overlay, {
-        display: "block",
+        display: "none",
         scaleY: 0,
         transformOrigin: "bottom",
       });
-      gsap.set(logo, { opacity: 0, top: "120%", scale: 1 });
+      gsap.set(logo, { autoAlpha: 0, top: "120%", scale: 1 });
     }
 
     if (ENABLE_INITIAL_REVEAL && !didInitialReveal) {

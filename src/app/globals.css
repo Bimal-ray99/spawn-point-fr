@@ -294,3 +294,89 @@ p.mono {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@keyframes marquee1Enter {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee2Enter {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-40%);
+  }
+}
+
+@keyframes marquee3Enter {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes preloaderExit {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+/* Initial state - marquees positioned off-screen */
+.preloader {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  
+  font-weight: 900;
+  line-height: 0.85;
+}
+
+.preloader .marquee-1 {
+  transform: translateX(-150%);
+}
+
+.preloader .marquee-2 {
+  transform: translateX(100%);
+}
+
+.preloader .marquee-3 {
+  transform: translateX(-150%);
+}
+
+/* Animated state - triggered by adding 'animate' class */
+.preloader.animate .marquee-1 {
+  animation: marquee1Enter 3s ease-out forwards;
+}
+
+.preloader.animate .marquee-2 {
+  animation: marquee2Enter 3s ease-out forwards;
+}
+
+.preloader.animate .marquee-3 {
+  animation: marquee3Enter 3s ease-out forwards;
+}
+
+.preloader.animate {
+  animation: preloaderExit 1.5s 3.5s ease-in-out forwards;
+}
+
+/* Hide preloader after animation completes */
+.preloader.animate {
+  animation: preloaderExit 1.5s 3.5s ease-in-out forwards,
+    hidePreloader 0s 5s forwards;
+}
+
+@keyframes hidePreloader {
+  to {
+    display: none;
+  }
+}
