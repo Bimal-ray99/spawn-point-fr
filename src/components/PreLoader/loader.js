@@ -11,13 +11,13 @@ export const preLoaderAnim = () => {
     .fromTo(
       ".marquee-2",
       { x: "100%" },
-      { x: "100%", duration: 3, ease: "power2.out" },
+      { x: "-40%", duration: 3, ease: "power2.out" },
       "<"
     )
     .fromTo(
       ".marquee-3",
-      { x: "-110%" },
-      { x: "10%", duration: 3, ease: "power2.out" },
+      { x: "-150%" },
+      { x: "0%", duration: 3, ease: "power2.out" },
       "<"
     )
     // Wait 1.5s before exit animation to hit 5s total

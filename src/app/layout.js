@@ -24,7 +24,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Toaster position="bottom-right" richColors closeButton />
         <PWAUpdateToast />

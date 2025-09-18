@@ -13,15 +13,15 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  /* Colors (from your previous config) */
-  --color-background: #ffffff; /* You said white-only */
-  --color-backgroundDark: #212121; /* kept in case you need dark sections */
+  /* Colors */
+  --color-background: #ffffff;
+  --color-backgroundDark: #212121;
   --color-primary: #0057ff;
   --color-secondary: #ff17d9;
   --color-marquee: #004d43;
   --color-about: #cdea68;
 
-  /* Tokenized palette you already used */
+  /* Tokenized palette */
   --base-100: rgb(242 237 230);
   --base-200: rgb(204 200 194);
   --base-250: rgb(179 167 152);
@@ -41,6 +41,70 @@
   --font-sans: "Host Grotesk";
   --font-mono: "DM Mono";
   --font-heading: "Barlow Condensed";
+
+  /* Responsive multiplier system from old CSS */
+  --multiplier: calc(100vw / 375);
+  --basesvh: 812;
+
+  /* Responsive text sizes using multiplier */
+  --text-2xs: calc(12 * var(--multiplier));
+  --text-xs: calc(13 * var(--multiplier));
+  --text-sm: calc(14 * var(--multiplier));
+  --text-md: calc(15 * var(--multiplier));
+  --text-base: calc(16 * var(--multiplier));
+  --text-lg: calc(18 * var(--multiplier));
+  --text-xl: calc(20 * var(--multiplier));
+  --text-24: calc(24 * var(--multiplier));
+  --text-26: calc(26 * var(--multiplier));
+  --text-28: calc(28 * var(--multiplier));
+  --text-30: calc(30 * var(--multiplier));
+  --text-40: calc(40 * var(--multiplier));
+  --text-50: calc(50 * var(--multiplier));
+  --text-70: calc(70 * var(--multiplier));
+  --text-80: calc(80 * var(--multiplier));
+  --text-100: calc(100 * var(--multiplier));
+  --text-144: calc(144 * var(--multiplier));
+  --text-200: calc(200 * var(--multiplier));
+  --text-300: calc(300 * var(--multiplier));
+  --text-400: calc(400 * var(--multiplier));
+
+  /* Fluid typography scale (mobile → desktop) - keeping both systems */
+  --step--1: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
+  --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.5vw, 2.1rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2.6vw, 2.8rem);
+  --step-4: clamp(2.6rem, 2rem + 3.4vw, 3.5rem);
+  --step-5: clamp(3.2rem, 2.3rem + 4.6vw, 4.5rem);
+}
+
+/* Desktop multiplier */
+@media (min-width: 768px) {
+  :root {
+    --multiplier: calc(100vw / 1440);
+  }
+}
+
+/* ---------- GLOBAL RESET / SAFETY FOR RESPONSIVENESS ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 @layer base {
@@ -62,10 +126,10 @@
   }
 }
 
-/* ---------- CSS VARIABLES (light only per your note) ---------- */
+/* ---------- CSS VARIABLES ---------- */
 :root {
   --background: var(--color-background);
-  --foreground: #111; /* near-black for legibility */
+  --foreground: #111;
   --card: #fff;
   --card-foreground: #111;
   --popover: #fff;
@@ -90,45 +154,12 @@
   --sidebar-accent-foreground: #111;
   --sidebar-border: #e7e7e7;
   --sidebar-ring: #c7c7c7;
-
-  /* Fluid typography scale (mobile → desktop) */
-  --step--1: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
-  --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
-  --step-1: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
-  --step-2: clamp(1.6rem, 1.3rem + 1.5vw, 2.1rem);
-  --step-3: clamp(2.1rem, 1.6rem + 2.6vw, 2.8rem);
-  --step-4: clamp(2.6rem, 2rem + 3.4vw, 3.5rem);
-  --step-5: clamp(3.2rem, 2.3rem + 4.6vw, 4.5rem);
 }
 
-/* ---------- GLOBAL RESET / SAFETY FOR RESPONSIVENESS ---------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow-x: clip; /* better than hidden for perf */
-}
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Don’t globally disable selection; it hurts usability on forms */
 ::selection {
   background: color-mix(in oklab, var(--primary) 20%, white);
 }
 
-/* Images/video never cause overflow */
 img,
 picture,
 video,
@@ -137,6 +168,121 @@ svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+/* ---------- RESPONSIVE UTILITIES (from old system) ---------- */
+@layer utilities {
+  .padding-x {
+    @apply px-[50px] md:px-[30px] sm:px-[20px] xm:px-[20px];
+  }
+  .padding-y {
+    @apply py-[100px] lg:py-[80px] md:py-[120px] sm:py-[60px] xm:py-[40px];
+  }
+  .margin {
+    @apply mt-[170px] lg:mt-[80px] md:mt-[60px] sm:mt-[40px] xm:mt-[40px] mb-[130px] lg:mb-[80px] md:mb-[60px] sm:mb-[40px] xm:mb-[40px];
+  }
+
+  /* Responsive Typography Classes */
+  .heroheading {
+    @apply text-[105px] leading-[90px] xl:text-[250px] xl:leading-[220px] lg:text-[200px] lg:leading-[170px] md:text-[150px] md:leading-[125px] sm:text-[130px] sm:leading-[110px] xm:text-[105px] xm:leading-[90px];
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .heading {
+    @apply text-[50px] leading-[60px] lg:text-[70px] lg:leading-[110px] md:text-[60px] md:leading-[75px] sm:text-[50px] sm:leading-[50px] xm:text-[35px] xm:leading-[50px];
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .sub-heading {
+    @apply text-[48px] leading-[48px] lg:text-[52px] lg:leading-[52px] md:text-[48px] md:leading-[48px] sm:text-[40px] sm:leading-[40px] xm:text-[31px] xm:leading-[31px];
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .paragraph {
+    @apply text-[18px] leading-[26px] lg:text-[18px] lg:leading-[24px] md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px] xm:text-[16px] xm:leading-[24px];
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  .sub-paragraph {
+    @apply xl:text-[21px] xl:leading-[31px] text-[16px] leading-[24px];
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  .small-text {
+    @apply xl:text-[16px] xl:leading-[24px] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[22px];
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  /* Fluid text utilities using multiplier system */
+  .text-fluid-2xs {
+    font-size: var(--text-2xs);
+  }
+  .text-fluid-xs {
+    font-size: var(--text-xs);
+  }
+  .text-fluid-sm {
+    font-size: var(--text-sm);
+  }
+  .text-fluid-md {
+    font-size: var(--text-md);
+  }
+  .text-fluid-base {
+    font-size: var(--text-base);
+  }
+  .text-fluid-lg {
+    font-size: var(--text-lg);
+  }
+  .text-fluid-xl {
+    font-size: var(--text-xl);
+  }
+  .text-fluid-24 {
+    font-size: var(--text-24);
+  }
+  .text-fluid-26 {
+    font-size: var(--text-26);
+  }
+  .text-fluid-28 {
+    font-size: var(--text-28);
+  }
+  .text-fluid-30 {
+    font-size: var(--text-30);
+  }
+  .text-fluid-40 {
+    font-size: var(--text-40);
+  }
+  .text-fluid-50 {
+    font-size: var(--text-50);
+  }
+  .text-fluid-70 {
+    font-size: var(--text-70);
+  }
+  .text-fluid-80 {
+    font-size: var(--text-80);
+  }
+  .text-fluid-100 {
+    font-size: var(--text-100);
+  }
+  .text-fluid-144 {
+    font-size: var(--text-144);
+  }
+  .text-fluid-200 {
+    font-size: var(--text-200);
+  }
+  .text-fluid-300 {
+    font-size: var(--text-300);
+  }
+  .text-fluid-400 {
+    font-size: var(--text-400);
+  }
 }
 
 /* Containers: fluid with clamped padding */
@@ -181,7 +327,7 @@ p.mono {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Utility helpers you already use */
+/* Utility helpers */
 .absolute-center {
   @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 }
@@ -195,7 +341,7 @@ p.mono {
   @apply hidden md:flex;
 }
 
-/* Link underline effects (unchanged) */
+/* Link underline effects */
 .hover {
   color: #18272f;
   position: relative;
@@ -250,7 +396,7 @@ p.mono {
   transition-delay: 0s;
 }
 
-/* Masks & overlays (unchanged; quote file names that include spaces) */
+/* Masks & overlays */
 .halftone-overlay {
   background-image: url("/images/bg/halftone.jpg");
   background-size: contain;
@@ -277,7 +423,7 @@ p.mono {
   mask: url("/images/bg/center.svg") no-repeat cover;
 }
 
-/* Slow spin */
+/* Animations */
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -295,6 +441,7 @@ p.mono {
   -webkit-text-fill-color: transparent;
 }
 
+/* Preloader animations */
 @keyframes marquee1Enter {
   from {
     transform: translateX(-150%);
@@ -331,11 +478,15 @@ p.mono {
   }
 }
 
-/* Initial state - marquees positioned off-screen */
+@keyframes hidePreloader {
+  to {
+    display: none;
+  }
+}
+
 .preloader {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  
   font-weight: 900;
   line-height: 0.85;
 }
@@ -343,40 +494,23 @@ p.mono {
 .preloader .marquee-1 {
   transform: translateX(-150%);
 }
-
 .preloader .marquee-2 {
   transform: translateX(100%);
 }
-
 .preloader .marquee-3 {
   transform: translateX(-150%);
 }
 
-/* Animated state - triggered by adding 'animate' class */
 .preloader.animate .marquee-1 {
   animation: marquee1Enter 3s ease-out forwards;
 }
-
 .preloader.animate .marquee-2 {
   animation: marquee2Enter 3s ease-out forwards;
 }
-
 .preloader.animate .marquee-3 {
   animation: marquee3Enter 3s ease-out forwards;
 }
-
-.preloader.animate {
-  animation: preloaderExit 1.5s 3.5s ease-in-out forwards;
-}
-
-/* Hide preloader after animation completes */
 .preloader.animate {
   animation: preloaderExit 1.5s 3.5s ease-in-out forwards,
     hidePreloader 0s 5s forwards;
-}
-
-@keyframes hidePreloader {
-  to {
-    display: none;
-  }
 }

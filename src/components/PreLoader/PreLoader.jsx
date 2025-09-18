@@ -1,13 +1,10 @@
 "use client";
 import { useEffect } from "react";
+import { preLoaderAnim } from "./loader";
 
 const PreLoader = () => {
   useEffect(() => {
-    // Add the animate class to trigger CSS animations
-    const preloader = document.querySelector(".preloader");
-    if (preloader) {
-      preloader.classList.add("animate");
-    }
+    preLoaderAnim();
   }, []);
 
   return (

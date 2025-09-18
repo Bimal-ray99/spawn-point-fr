@@ -4,6 +4,11 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/all";
+import useMaskImage from "@/hooks/useMaskImage"; // Import the separate hook
+import {
+  StaggerChildren,
+  StaggerItem,
+} from "@/components/animatiowrapper/page";
 
 gsap.registerPlugin(SplitText);
 
@@ -17,6 +22,15 @@ export default function HeroDesktop() {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "50vh start"],
+  });
+
+  // Add mask image hook with blue color
+  const maskImage = useMaskImage(scrollYProgress, false, {
+    divisions: 24,
+    inset: 0.15,
+    gap: 0.3,
+    vh: 100,
+    color: "#0057ff",
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
@@ -125,13 +139,21 @@ export default function HeroDesktop() {
       ref={containerRef}
       className="w-full h-screen relative overflow-hidden"
       id="video-frame"
+      data-scroll
+      data-scroll-speed="-.3"
     >
       <div className="w-full h-full flex flex-col justify-between">
         <div />
         <div className="w-full flex flex-col justify-between md:h-[100vh] h-[85vh]">
-          {/* Video Background - No mask, just parallax */}
+          {/* Blue Background Layer */}
+          <div
+            className="absolute top-0 left-0 w-full h-full"
+            style={{ backgroundColor: "#0057ff" }}
+          />
+
+          {/* Video Background - With mask and parallax */}
           <motion.div
-            style={{ y }}
+            style={{ y, maskImage }}
             className="absolute top-0 left-0 w-full h-full overflow-hidden"
           >
             <video
@@ -181,31 +203,33 @@ export default function HeroDesktop() {
             />
           </div>
 
-          {/* Main Title Section - Using original padding-y equivalent */}
-          <div className="relative z-20 flex flex-col items-center justify-center h-full py-[100px] lg:py-[80px] md:py-[120px] sm:py-[60px] xm:py-[40px]">
-            <div className="text-center">
-              <h1
+          {/* Main Title Section */}
+          <div className="relative z-20 flex flex-col items-center justify-center h-full padding-y ">
+            <motion.div
+              className="text-center "
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={
+                isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+              }
+              transition={{
+                duration: 1,
+                delay: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <div
                 ref={titleRef}
-                className="text-white font-extrabold tracking-normal transition-transform duration-200"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(60px, 25vw, 250px)",
-                  lineHeight: "0.85",
-                  textTransform: "uppercase",
-                  fontStyle: "italic",
-                  fontWeight: "900",
-                }}
+                className="text-white heroheading font-extrabold tracking-normal font-DurkItalic leading-[0.85em] md:leading-[1em] transition-transform duration-200"
               >
-                <span className="block md:inline">SPAWN </span>
-                <span className="block md:inline md:ml-4">POINT</span>
-              </h1>
-            </div>
+                SPAWN POINT
+              </div>
+            </motion.div>
           </div>
 
           {/* Bottom Section - Platform Logos */}
           <div className="w-full flex flex-col h-[22vh]">
             <div className="flex justify-between items-center px-[50px] md:px-[30px] sm:px-[20px] xm:px-[20px] gap-[10px]">
-              <div className="absolute md:bottom-12 bottom-8 left-0 right-0 z-20">
+              <div className="absolute md:bottom-12 bottom-15 left-0 right-0 z-20">
                 {/* Description */}
                 <div className="text-center mb-4 md:mb-6">
                   <p
@@ -222,90 +246,90 @@ export default function HeroDesktop() {
                 </div>
 
                 {/* Platform logos for larger screens */}
-                <div
-                  ref={platformsRef}
-                  className="justify-center items-center gap-6 md:gap-12 flex-wrap hidden md:flex"
+                <StaggerChildren
+                  className="justify-center items-center gap-4 md:gap-8 flex-wrap hidden md:flex"
+                  staggerDelay={0.1}
+                  delay={1.2}
                 >
                   {[
                     {
                       src: "/images/platforms/playstation.webp",
                       alt: "PlayStation",
-                      width: 60,
-                      height: 40,
+                      height: "h-6",
                     },
                     {
                       src: "/images/platforms/xbox.webp",
                       alt: "Xbox",
-                      width: 50,
-                      height: 50,
+                      height: "h-7",
                     },
                     {
                       src: "/images/platforms/nintendo-switch.webp",
                       alt: "Nintendo Switch",
-                      width: 60,
-                      height: 60,
+                      height: "h-8",
                     },
                     {
                       src: "/images/platforms/steam.webp",
                       alt: "Steam",
-                      width: 60,
-                      height: 60,
+                      height: "w-24",
                     },
                     {
                       src: "/images/platforms/epic.png",
                       alt: "Epic Games",
-                      width: 60,
-                      height: 60,
+                      height: "w-9",
                     },
                   ].map((platform, index) => (
-                    <div
-                      key={index}
-                      className="platform-item cursor-pointer"
-                      style={{ height: "clamp(40px, 5vw, 60px)" }}
-                    >
-                      <Image
-                        src={platform.src}
-                        alt={platform.alt}
-                        width={platform.width}
-                        height={platform.height}
-                        className="h-full w-auto object-contain"
-                      />
-                    </div>
+                    <StaggerItem key={index}>
+                      <motion.div
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        className={platform.height}
+                      >
+                        <Image
+                          src={platform.src}
+                          alt={platform.alt}
+                          width={150}
+                          height={150}
+                          className="h-full w-auto"
+                        />
+                      </motion.div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerChildren>
 
                 {/* Platform logos for mobile */}
-                <div className="justify-center items-center gap-6 flex-wrap flex md:hidden">
+                <div
+                  ref={platformsRef}
+                  className="justify-center items-center gap-6 flex-wrap flex md:hidden"
+                >
                   {[
                     {
                       src: "/images/platforms/ps-mini.webp",
                       alt: "PlayStation",
-                      width: 32,
-                      height: 32,
+                      width: 25,
+                      height: 25,
                     },
                     {
                       src: "/images/platforms/xbox-mini.webp",
                       alt: "Xbox",
-                      width: 32,
-                      height: 32,
+                      width: 20,
+                      height: 20,
                     },
                     {
                       src: "/images/platforms/nintendo-mini.webp",
                       alt: "Nintendo Switch",
-                      width: 32,
-                      height: 32,
+                      width: 20,
+                      height: 20,
                     },
                     {
                       src: "/images/platforms/steam-mini.webp",
                       alt: "Steam",
-                      width: 32,
-                      height: 32,
+                      width: 20,
+                      height: 20,
                     },
                     {
                       src: "/images/platforms/epic.png",
                       alt: "Epic Games",
-                      width: 32,
-                      height: 32,
+                      width: 20,
+                      height: 20,
                     },
                   ].map((platform, index) => (
                     <div
