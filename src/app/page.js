@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PreLoader from "@/components/PreLoader/PreLoader";
+import HeroDesktop from "@/components/screens/homepage/HeroDesktop";
 
 let hasInitialLoaded = false;
 
@@ -17,7 +18,7 @@ export default function Hero() {
         document.body.style.cursor = "default";
         window.scrollTo(0, 0);
         setIsLoading(false);
-        hasInitialLoaded = true; // Mark as loaded for future navigations
+        hasInitialLoaded = true;
       }, 5000);
 
       return () => clearTimeout(loadingTimer);
@@ -29,6 +30,7 @@ export default function Hero() {
       <AnimatePresence mode="wait">
         {isLoading && <PreLoader key="preloader" />}
       </AnimatePresence>
+      <HeroDesktop />
     </>
   );
 }
