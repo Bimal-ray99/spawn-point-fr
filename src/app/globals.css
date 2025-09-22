@@ -20,6 +20,7 @@
   --color-secondary: #ff17d9;
   --color-marquee: #004d43;
   --color-about: #cdea68;
+  --color-offblack: #1a1a1a;
 
   /* Tokenized palette */
   --base-100: rgb(242 237 230);
@@ -38,9 +39,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --font-sans: "Host Grotesk";
-  --font-mono: "DM Mono";
-  --font-heading: "Barlow Condensed";
+  --font-sans: "Host Grotesk", sans-serif;
+  --font-mono: "DM Mono", monospace;
+  --font-heading: "Barlow Condensed", sans-serif;
 
   /* Responsive multiplier system from old CSS */
   --multiplier: calc(100vw / 375);
@@ -180,6 +181,40 @@ svg {
   }
   .margin {
     @apply mt-[170px] lg:mt-[80px] md:mt-[60px] sm:mt-[40px] xm:mt-[40px] mb-[130px] lg:mb-[80px] md:mb-[60px] sm:mb-[40px] xm:mb-[40px];
+  }
+
+  /* Color utilities */
+  .text-offblack {
+    color: var(--color-offblack);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  /* Text stroke utility */
+  .stroke-text {
+    -webkit-text-stroke: 2px currentColor;
+    text-stroke: 2px currentColor;
+  }
+
+  /* Font family utilities */
+  .font-DurkItalic {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .font-DurkBoldItalic {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 900;
+  }
+
+  .font-NeueMontreal {
+    font-family: var(--font-sans);
   }
 
   /* Responsive Typography Classes */
@@ -406,21 +441,45 @@ p.mono {
   inset: 0;
   z-index: 10;
 }
+
 .mask-left-corner {
-  -webkit-mask: url("/images/bg/leftcornerele.svg") no-repeat cover;
-  mask: url("/images/bg/leftcornerele.svg") no-repeat cover;
+  -webkit-mask: url("/images/bg/leftcornerele.svg") no-repeat;
+  -webkit-mask-size: cover;
+  mask: url("/images/bg/leftcornerele.svg") no-repeat;
+  mask-size: cover;
 }
+
 .mask-right-corner {
-  -webkit-mask: url("/images/bg/right%20corner%20ele.svg") no-repeat cover;
-  mask: url("/images/bg/right%20corner%20ele.svg") no-repeat cover;
+  -webkit-mask: url("/images/bg/right%20corner%20ele.svg") no-repeat;
+  -webkit-mask-size: cover;
+  mask: url("/images/bg/right%20corner%20ele.svg") no-repeat;
+  mask-size: cover;
 }
+
 .bg-ele {
-  -webkit-mask: url("/images/bg/bgele.svg") no-repeat cover;
-  mask: url("/images/bg/bgele.svg") no-repeat cover;
+  -webkit-mask: url("/images/bg/bgele.svg") no-repeat;
+  -webkit-mask-size: cover;
+  mask: url("/images/bg/bgele.svg") no-repeat;
+  mask-size: cover;
 }
+
 .bg-center {
-  -webkit-mask: url("/images/bg/center.svg") no-repeat cover;
-  mask: url("/images/bg/center.svg") no-repeat cover;
+  -webkit-mask: url("/images/bg/center.svg") no-repeat;
+  -webkit-mask-size: cover;
+  mask: url("/images/bg/center.svg") no-repeat;
+  mask-size: cover;
+}
+
+/* Alternative corner mask using CSS clip-path (fallback if SVGs don't work) */
+.corner-mask-fallback {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
 }
 
 /* Animations */

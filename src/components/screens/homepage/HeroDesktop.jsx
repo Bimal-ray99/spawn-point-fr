@@ -229,7 +229,7 @@ export default function HeroDesktop() {
           {/* Bottom Section - Platform Logos */}
           <div className="w-full flex flex-col h-[22vh]">
             <div className="flex justify-between items-center px-[50px] md:px-[30px] sm:px-[20px] xm:px-[20px] gap-[10px]">
-              <div className="absolute md:bottom-12 bottom-15 left-0 right-0 z-20">
+              <div className="absolute md:bottom-12 bottom-8 left-0 right-0 z-20">
                 {/* Description */}
                 <div className="text-center mb-4 md:mb-6">
                   <p
@@ -304,32 +304,32 @@ export default function HeroDesktop() {
                     {
                       src: "/images/platforms/ps-mini.webp",
                       alt: "PlayStation",
-                      width: 25,
-                      height: 25,
+                      width: 32,
+                      height: 32,
                     },
                     {
                       src: "/images/platforms/xbox-mini.webp",
                       alt: "Xbox",
-                      width: 20,
-                      height: 20,
+                      width: 32,
+                      height: 32,
                     },
                     {
                       src: "/images/platforms/nintendo-mini.webp",
                       alt: "Nintendo Switch",
-                      width: 20,
-                      height: 20,
+                      width: 32,
+                      height: 32,
                     },
                     {
                       src: "/images/platforms/steam-mini.webp",
                       alt: "Steam",
-                      width: 20,
-                      height: 20,
+                      width: 32,
+                      height: 32,
                     },
                     {
                       src: "/images/platforms/epic.png",
                       alt: "Epic Games",
-                      width: 20,
-                      height: 20,
+                      width: 32,
+                      height: 32,
                     },
                   ].map((platform, index) => (
                     <div

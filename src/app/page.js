@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import PreLoader from "@/components/PreLoader/PreLoader";
 import HeroDesktop from "@/components/screens/homepage/HeroDesktop";
+import EnterArenaWrapper from "@/container/EnterTheArena";
 
 let hasInitialLoaded = false;
 
@@ -30,6 +31,8 @@ export default function Hero() {
       <AnimatePresence mode="wait">
         {isLoading && <PreLoader key="preloader" />}
       </AnimatePresence>
+      <HeroDesktop />
+      <EnterArenaWrapper />
       <HeroDesktop />
     </>
   );
