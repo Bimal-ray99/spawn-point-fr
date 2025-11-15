@@ -76,11 +76,11 @@ const TopBar = () => {
             navigateWithTransition("/");
           }}
         >
-          <img src="/logos/terrene-logo-symbol.png" alt="" />
+          <img src="/logos/logo-white.png" alt="" />
         </a>
       </div>
       <div className="top-bar-cta">
-        <AnimatedButton label="Reserve" route="/connect" animate={false} />
+        <AnimatedButton label="Login" route="/login" animate={false} />
       </div>
     </div>
   );

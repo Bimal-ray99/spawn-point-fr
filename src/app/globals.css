@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@200..800&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --base-100: rgb(242, 237, 230);
   --base-200: rgb(204, 200, 194);
@@ -9,6 +13,19 @@
   --base-400: rgb(102, 95, 86);
   --base-450: rgb(31, 29, 29);
   --base-500: rgb(20, 19, 19);
+}
+
+@font-face {
+  src: url("/fonts/Druk-SuperItalic.otf");
+  font-family: DurkItalic;
+}
+@font-face {
+  src: url("/fonts/DrukTextWide-Bold.otf");
+  font-family: DurkBold;
+}
+@font-face {
+  src: url("/fonts/DrukTextWide-BoldItalic.otf");
+  font-family: DurkBoldItalic;
 }
 
 * {
@@ -21,6 +38,14 @@
 body {
   font-family: "Manrope", sans-serif;
   background-color: #0d0c0c;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 section,
@@ -166,4 +191,22 @@ body.menu-open .menu,
 body.menu-open .menu *,
 body.menu-open .menu-toggle {
   pointer-events: auto;
+}
+
+.preloader {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden !important;
+}
+
+.preloader .texts-container {
+  height: 60px;
 }

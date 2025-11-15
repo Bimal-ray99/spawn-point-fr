@@ -9,20 +9,76 @@
   pointer-events: all;
 }
 
+/* ============================
+   🔵 SLANTED MARQUEE BACKGROUND
+   ============================ */
+
+.loader .marquee-wrapper {
+  position: absolute;
+  left: 50%;
+  width: 220%;
+  transform: translateX(-50%) rotate(8deg);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 20;
+}
+
+.loader .marquee-wrapper:nth-of-type(1) {
+  top: 10%;
+}
+.loader .marquee-wrapper:nth-of-type(2) {
+  top: 40%;
+}
+.loader .marquee-wrapper:nth-of-type(3) {
+  top: 70%;
+}
+
+.loader .marquee {
+  white-space: nowrap;
+  padding: 0 2rem;
+}
+
+.loader .marquee h1 {
+  font-size: 20rem;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  @apply font-DurkItalic;
+  @apply text-white;
+}
+
+@media (max-width: 1000px) {
+  .loader .marquee h1 {
+    font-size: 16rem;
+  }
+}
+
+/* ============================
+   🔴 BLOCK OVERLAY WIPES
+   ============================ */
+
 .loader .overlay {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   display: flex;
-  color: var(--base-100);
+  background: transparent;
+  z-index: 5;
 }
 
 .loader .block {
   width: 100%;
   height: 100%;
-  background: var(--base-500);
+  @apply bg-primary;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
+
+/* ============================
+   🔥 INTRO LOGO
+   ============================ */
 
 .loader .intro-logo {
   position: absolute;
@@ -31,51 +87,70 @@
   transform: translate(-50%, -50%);
   display: flex;
   gap: 0.5rem;
+  z-index: 30;
 }
 
 .loader #word-1 {
   position: relative;
-  left: 0rem;
+  left: 0;
   padding-right: 0.25rem;
-  color: var(--base-100);
+  @apply text-white;
 }
 
 .loader #word-2 {
   position: relative;
   left: 0.5rem;
   padding-right: 0.25rem;
-  color: var(--base-100);
+  @apply text-background;
 }
 
 .loader .word h1 {
   font-size: 2rem;
-  color: var(--base-300);
+  @apply text-white;
   letter-spacing: -0.05rem;
 }
+
+.loader #word-1 h1 {
+  transform: translateY(-120%);
+}
+.loader #word-2 h1 {
+  transform: translateY(120%);
+}
+
+/* ============================
+   DIVIDER LINE
+   ============================ */
 
 .loader .divider {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleY(0);
   transform-origin: center top;
   width: 1px;
   height: 100%;
-  background-color: rgba(242, 237, 230, 0.125);
+  @apply bg-background;
+  z-index: 40;
+  will-change: transform;
 }
+
+/* ============================
+   SPINNER
+   ============================ */
 
 .loader .spinner-container {
   position: absolute;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 25;
 }
 
 .loader .spinner {
   width: 50px;
   height: 50px;
   border: 1.4px solid var(--base-350);
-  border-top-color: rgba(242, 237, 230, 0.05);
+  border-top-color: rgba(255, 255, 255, 1);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -86,70 +161,20 @@
   }
 }
 
-.loader .counter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.loader .count {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-}
-
-.loader .digit {
-  flex: 1;
-  padding-top: 1rem;
-}
-
-.loader .count .digit h1 {
-  font-size: 15rem;
-  font-weight: 400;
-  color: var(--base-400);
-}
-
+/* CLIP MASK FOR ANIMATION */
 .loader .line,
 .loader .word,
-.loader .count .digit {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+.loader {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-.loader .line h1,
-.loader .line p,
-.loader .count .digit h1 {
-  position: relative;
-  transform: translateY(120%);
-  will-change: transform;
-}
-
-.loader #word-1 h1 {
-  transform: translateY(-120%);
-}
-
-.loader #word-2 h1 {
-  transform: translateY(120%);
-}
-
-.loader .block {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-.loader .divider {
-  transform: scaleY(0%);
-  will-change: transform;
-}
-
+/* RESPONSIVE COUNTER */
 @media (max-width: 1000px) {
-  .loader .counter .count .digit h1 {
+  .loader h1 {
     font-size: 7rem;
   }
 
-  .loader .counter .count .digit {
+  .loader {
     padding-top: 0.25rem;
   }
 }
