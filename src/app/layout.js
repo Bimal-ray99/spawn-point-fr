@@ -5,8 +5,7 @@ import Nav from "@/components/Nav/Nav";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 
 export const metadata = {
-  title: "Terrene | MWT by Codegrid ",
-  description: "Monthly Website Template by Codegrid | August 2025",
+  title: "Sapwn Point",
 };
 
 export default function RootLayout({ children }) {
@@ -15,9 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <ClientLayout>
           <TopBar />
-          <Nav />
           {children}
-          <ConditionalFooter />
         </ClientLayout>
       </body>
     </html>

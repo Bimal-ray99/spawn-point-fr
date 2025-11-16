@@ -1,0 +1,241 @@
+/* Mobile Arena Section */
+.arena-mobile {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  @apply bg-background;
+}
+
+/* Blue diagonal background - top left */
+.arena-mobile-blue-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  @apply bg-primary;
+  clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 0% 100%);
+  z-index: 1;
+}
+
+.arena-mobile-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.arena-mobile-halftone {
+  position: absolute;
+  inset: 0;
+  background-image: url("/elements/halftone.jpg");
+  background-size: cover;
+  mix-blend-mode: multiply;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+/* White background - bottom right */
+.arena-mobile-white-bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 50%;
+  @apply bg-background;
+  z-index: 2;
+}
+
+.arena-mobile-bg-pattern {
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+/* Character positioned on right */
+.arena-mobile-character {
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.arena-mobile-character-img {
+  width: auto;
+  height: auto;
+  max-width: 60vw;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
+}
+
+/* Text area on left bottom */
+.arena-mobile-text-area {
+  position: absolute;
+  bottom: 8%;
+  left: 5%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 55%;
+}
+
+.arena-mobile-enter {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  @apply font-DurkBoldItalic;
+  @apply text-primary;
+}
+
+.arena-mobile-arena-box {
+  position: relative;
+  @apply bg-primary;
+  padding: 1rem 1.5rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% 100%,
+    18px 100%,
+    0 calc(100% - 18px)
+  );
+  width: fit-content;
+  overflow: hidden;
+  border-radius: 0.4rem;
+}
+
+.arena-mobile-arena-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/elements/halftone.jpg");
+  background-size: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.arena-mobile-arena-bg {
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.arena-mobile-arena-text {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  color: #ffffff;
+  @apply font-DurkBold;
+}
+
+.arena-mobile-desc {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #1f1f1f;
+  margin-top: 0.5rem;
+}
+
+.arena-mobile-badge {
+  @apply bg-primary;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Scrolling text decorations */
+.arena-mobile-scroll-top {
+  position: absolute;
+  top: 5%;
+  right: -15%;
+  font-size: clamp(8rem, 30vw, 15rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.12);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 10;
+  @apply font-DurkItalic;
+}
+
+.arena-mobile-scroll-bottom {
+  position: absolute;
+  bottom: -3%;
+  left: -20%;
+  font-size: clamp(6rem, 25vw, 12rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px rgba(0, 87, 255, 0.25);
+  color: transparent;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 3;
+  @apply font-DurkItalic;
+}
+
+/* UI Elements */
+.arena-mobile-timer {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.arena-mobile-timer-dot {
+  width: 10px;
+  height: 10px;
+  @apply bg-primary;
+}
+
+.arena-mobile-timer span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  @apply text-primary;
+}
+
+.arena-mobile-hashtag {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+}
+
+.arena-mobile-hashtag span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  @apply text-primary;
+}
+
+.arena-mobile-dot {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 12px;
+  height: 12px;
+  @apply bg-primary;
+  z-index: 50;
+}

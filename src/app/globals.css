@@ -210,3 +210,66 @@ body.menu-open .menu-toggle {
 .preloader .texts-container {
   height: 60px;
 }
+
+/* Corner Mask */
+.halftone-overlay {
+  background-image: url("/elements/halftone.jpg");
+  background-size: contain;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.mask-left-corner {
+  -webkit-mask-image: url("/elements/leftcornerele.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: url("/elements/leftcornerele.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.mask-right-corner {
+  -webkit-mask-image: url("/elements/right corner ele.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: url("/elements/right corner ele.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.bg-ele {
+  -webkit-mask-image: url("/elements/bgele.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: url("/elements/bgele.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.bg-center {
+  -webkit-mask-image: url("/elements/center.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: url("/elements/center.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.stroke-text {
+  -webkit-text-stroke: 2px #0057ff;
+  text-stroke: 2px #0057ff;
+  color: transparent;
+}
+.stroke-text-white {
+  -webkit-text-stroke: 2px white;
+  text-stroke: 2px white;
+  color: transparent;
+}
+.stroke-text-pink {
+  -webkit-text-stroke: 2px rgb(255, 0, 157);
+  text-stroke: 2px rgb(255, 0, 157) blue;
+  color: transparent;
+}

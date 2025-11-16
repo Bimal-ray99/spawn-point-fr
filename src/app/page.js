@@ -8,10 +8,14 @@ import { useLenis } from "lenis/react";
 import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import PreLoader from "@/components/PreLoader/PreLoader";
 import Hero from "@/components/Hero/Hero";
-import WhatWeDo from "@/components/WhatWeDo/WhatWeDo";
+import WhatWeDo from "@/components/WhatWeDo";
+import ChampionSection from "@/components/ChampionSection";
 import FeaturedProjectsSection from "@/components/FeaturedProjectsSection/FeaturedProjectsSection";
 import ClientReviewsSection from "@/components/ClientReviewsSection/ClientReviewsSection";
 import GalleryCallout from "@/components/GalleryCallout/GalleryCallout";
+import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
+import Nav from "@/components/Nav/Nav";
+import FeaturesSection from "@/components/FeaturesSection";
 
 let isInitialLoad = true;
 
@@ -51,10 +55,12 @@ export default function Home() {
 
   return (
     <>
+      <Nav />
       {showPreloader && <PreLoader />}
       <Hero showPreloader={showPreloader} />
       <WhatWeDo />
-      <FeaturedProjectsSection />
+      <ChampionSection />
+      <FeaturesSection />
       <ClientReviewsSection />
       <GalleryCallout />
       <CTAWindow
@@ -63,6 +69,7 @@ export default function Home() {
         callout="Spaces that breathe with time"
         description="Our approach is guided by rhythm, proportion, and light, allowing every environment to grow more meaningful as it is lived in."
       />
+      <ConditionalFooter />
     </>
   );
 }

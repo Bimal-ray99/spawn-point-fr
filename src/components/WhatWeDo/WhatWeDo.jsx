@@ -1,90 +1,133 @@
 "use client";
+import "./WhatWeDo.css";
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Copy from "@/components/Copy/Copy";
-
-gsap.registerPlugin(ScrollTrigger);
+import { ScrollingText } from "@/components/ScrollingText/ScrollingText";
 
 export default function WhatWeDo() {
-  const tagsRef = useRef(null);
+  const sectionRef = useRef(null);
+  const characterRef = useRef(null);
 
-  useGSAP(
-    () => {
-      if (!tagsRef.current) return;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
 
-      const tags = tagsRef.current.querySelectorAll(".what-we-do-tag");
-      gsap.set(tags, { opacity: 0, x: -40 });
-
-      ScrollTrigger.create({
-        trigger: tagsRef.current,
-        start: "top 90%",
-        once: true,
-        animation: gsap.to(tags, {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-        }),
-      });
-    },
-    { scope: tagsRef }
-  );
+  // Parallax effects
+  const characterY = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["-3%", "3%"]);
 
   return (
-    <section className="what-we-do">
-      <div className="container">
-        <div className="what-we-do-header">
-          <Copy delay={0.1}>
-            <h1>
-              <span className="spacer">&nbsp;</span>
-              At Terrene, we design with purpose and clarity, creating spaces
-              that speak through light, scale, and the quiet confidence of
-              lasting form.
-            </h1>
-          </Copy>
-        </div>
-        <div className="what-we-do-content">
-          <div className="what-we-do-col">
-            <Copy delay={0.1}>
-              <p>How we work</p>
-            </Copy>
+    <section ref={sectionRef} className="what-we-do">
+      {/* Timer UI Element */}
+      <div className="what-we-do-timer">
+        <div className="what-we-do-timer-dot"></div>
+        <span>00:19:00</span>
+      </div>
 
-            <Copy delay={0.15}>
-              <p className="lg">
-                We approach each build with a clarity of intent. Every plan is
-                shaped through research, iteration, and conversation. What
-                remains is the essential, designed to last and built to feel
-                lived in.
+      {/* Main Content Grid */}
+      <div className="what-we-do-grid">
+        {/* Left Side - Text Content */}
+        <div className="what-we-do-text-side">
+          {/* Background Image */}
+          <div className="what-we-do-left-bg">
+            <Image
+              src="/elements/bgele.svg"
+              alt=""
+              fill
+              className="object-cover opacity-[50%]"
+              aria-hidden="true"
+            />
+          </div>
+
+          <div className="what-we-do-text-content">
+            <div className="what-we-do-heading-wrapper">
+              <Copy delay={0.1}>
+                <h2 className="what-we-do-small-heading">Enter The</h2>
+              </Copy>
+
+              <div className="what-we-do-main-heading">
+                <div className="bg-ele"></div>
+                <Copy delay={0.2}>
+                  <h1>ARENA</h1>
+                </Copy>
+              </div>
+            </div>
+
+            <Copy delay={0.3}>
+              <p className="what-we-do-description">
+                Dominate the battlefield, outplay your rivals, and claim your
+                legacy.{" "}
+                <span className="what-we-do-highlight">The Arena awaits!</span>
               </p>
             </Copy>
           </div>
-          <div className="what-we-do-col">
-            <div className="what-we-do-tags" ref={tagsRef}>
-              <div className="what-we-do-tag">
-                <h3>Quiet</h3>
-              </div>
-              <div className="what-we-do-tag">
-                <h3>View</h3>
-              </div>
-              <div className="what-we-do-tag">
-                <h3>Tactile</h3>
-              </div>
-              <div className="what-we-do-tag">
-                <h3>Light-forward</h3>
-              </div>
-              <div className="what-we-do-tag">
-                <h3>Slow design</h3>
-              </div>
-              <div className="what-we-do-tag">
-                <h3>Modular rhythm</h3>
-              </div>
-            </div>
+
+          {/* Decorative Text Background - Left Scrolling */}
+          <div
+            className="absolute inset-0 bottom-0 z-0 flex items-end overflow-hidden"
+            style={{
+              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            }}
+          >
+            <ScrollingText
+              text="EnterThe"
+              direction="leftToRight"
+              className="absolute font-DurkItalic uppercase tracking-wider text-transparent stroke-text pointer-events-none z-0 leading-none text-[clamp(8rem,20vw,20rem)] bottom-[-6rem] right-80"
+              scrollTrigger={sectionRef}
+            />
           </div>
         </div>
+
+        {/* Right Side - Video/Visual Section */}
+        <div className="what-we-do-visual-side">
+          <motion.div style={{ y: videoY }} className="what-we-do-video-wrap">
+            <div className="halftone-overlay opacity-[3%]"></div>
+            <video autoPlay loop muted playsInline className="what-we-do-video">
+              <source src="/home/hero-4.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+
+          {/* Large Background Text - Right Scrolling */}
+          <ScrollingText
+            text="EnterTheArena"
+            direction="rightToLeft"
+            className="absolute font-DurkItalic uppercase tracking-wider text-white pointer-events-none leading-none text-[clamp(10rem,25vw,20rem)] top-[-7rem] -left-44 z-20"
+            scrollTrigger={sectionRef}
+          />
+        </div>
+
+        {/* Character Image - Overlapping both sections */}
+        <motion.div
+          ref={characterRef}
+          style={{ y: characterY }}
+          className="what-we-do-character"
+        >
+          <Image
+            src="/home/mira.png"
+            alt="Gaming Character"
+            width={550}
+            height={550}
+            className="what-we-do-character-img"
+            priority
+          />
+        </motion.div>
       </div>
+
+      {/* Decorative UI Elements */}
+      <div className="what-we-do-ui-dot what-we-do-ui-dot-top"></div>
+      <div className="what-we-do-ui-dot what-we-do-ui-dot-bottom"></div>
+
+      {/* Hashtag Element */}
+      <div className="what-we-do-hashtag">
+        <div className="what-we-do-hashtag-line text-primary"></div>
+        <span>#GAMINGLEAGUE</span>
+      </div>
+
+      {/* Decorative Corner Mask */}
+      <div className="mask-left-corner absolute bottom-0 right-0 z-10 h-1/2 w-[30%] rotate-180 bg-gray-200" />
     </section>
   );
 }

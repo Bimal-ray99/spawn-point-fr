@@ -1,11 +1,26 @@
 import Copy from "@/components/Copy/Copy";
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import useMaskImage from "@/hooks/useMaskImage";
+import { useRef } from "react";
 
 export default function Hero({ showPreloader }) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "50vh start"],
+  });
+  const maskImage = useMaskImage(scrollYProgress, false, {
+    divisions: 24,
+    inset: 0.15,
+    gap: 0.3,
+    vh: 100,
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   return (
-    <section className="hero">
-      <div className="hero-bg">
+    <section ref={containerRef} className="hero">
+      <motion.div style={{ y, maskImage }} className="hero-bg">
         <video
           autoPlay
           loop
@@ -15,7 +30,7 @@ export default function Hero({ showPreloader }) {
         >
           <source src="/home/hero-4.mp4" type="video/mp4" />
         </video>
-      </div>
+      </motion.div>
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <Image
           src="/home/hero-image-overlay.webp"
@@ -86,10 +101,7 @@ export default function Hero({ showPreloader }) {
                 },
               ].map((platform, index) => (
                 <div key={index}>
-                  <div
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    className={platform.height}
-                  >
+                  <div className={platform.height}>
                     <Image
                       src={platform.src}
                       alt={platform.alt}
@@ -103,11 +115,7 @@ export default function Hero({ showPreloader }) {
             </div>
 
             {/* Platform logos for mobile */}
-            <div
-              className="justify-center items-center gap-4 md:gap-8 flex-wrap flex md:hidden"
-              staggerDelay={0.1}
-              delay={1.2}
-            >
+            <div className="justify-center items-center gap-4 md:gap-8 flex-wrap flex md:hidden">
               {[
                 {
                   src: "/home/platforms/ps-mini.webp",
@@ -125,7 +133,7 @@ export default function Hero({ showPreloader }) {
                 { src: "/home/platforms/epic.png", alt: "Epic Games" },
               ].map((platform, index) => (
                 <div key={index}>
-                  <div whileHover={{ scale: 1.1 }} className="h-6 md:h-8">
+                  <div className="h-6 md:h-8">
                     <Image
                       src={platform.src}
                       alt={platform.alt}

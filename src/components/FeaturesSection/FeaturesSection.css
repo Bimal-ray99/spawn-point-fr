@@ -1,0 +1,29 @@
+/* Feature Card Styles */
+.feature-card {
+  will-change: transform, opacity;
+  transform-origin: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .feature-card {
+    border-width: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-card {
+    border-width: 1.5px;
+  }
+}
+
+/* Ensure smooth transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
