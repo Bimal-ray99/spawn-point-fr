@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="footer-meta-block">
               <div className="footer-meta-logo">
                 <Copy delay={0.1}>
-                  <h3 className="lg">Terrene</h3>
+                  <h3 className="lg">Spawn Point</h3>
                 </Copy>
               </div>
               <Copy delay={0.2}>
@@ -72,7 +72,7 @@ const Footer = () => {
                 >
                   <h3>Index</h3>
                 </a>
-                <a
+                {/* <a
                   href="/studio"
                   onClick={(e) => {
                     e.preventDefault();
@@ -116,7 +116,7 @@ const Footer = () => {
                   }}
                 >
                   <h3>Connect</h3>
-                </a>
+                </a> */}
               </Copy>
             </div>
           </div>
@@ -154,9 +154,6 @@ const Footer = () => {
             <img src="/logos/terrene-footer-logo.svg" alt="" />
           </div>
           <div className="footer-copyright">
-            <p>
-              Developed by — <span>Codegrid</span>
-            </p>
             <p>This website is using cookies.</p>
             <p>All rights reserverd &copy; 2025</p>
           </div>

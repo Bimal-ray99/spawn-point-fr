@@ -28,8 +28,8 @@ export default function PreLoader() {
       </div>
 
       <div className="overlay">
-        <div className="block"></div>
-        <div className="block"></div>
+        <div className="blocker"></div>
+        <div className="blocker"></div>
       </div>
 
       <div className="intro-logo">

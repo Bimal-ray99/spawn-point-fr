@@ -16,6 +16,9 @@ import GalleryCallout from "@/components/GalleryCallout/GalleryCallout";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import Nav from "@/components/Nav/Nav";
 import FeaturesSection from "@/components/FeaturesSection";
+import Vr from "@/components/Vr/page";
+import Vrcard from "@/components/HorizontalScroll/HorizontalScroll";
+import { RefreshSection } from "@/components/RefreshSection/RefreshSection";
 
 let isInitialLoad = true;
 
@@ -61,14 +64,17 @@ export default function Home() {
       <WhatWeDo />
       <ChampionSection />
       <FeaturesSection />
-      <ClientReviewsSection />
+      <Vr />
+      <Vrcard />
+      <RefreshSection/>
+      {/* <ClientReviewsSection />
       <GalleryCallout />
       <CTAWindow
         img="/home/home-cta-window.jpg"
         header="Terrene"
         callout="Spaces that breathe with time"
         description="Our approach is guided by rhythm, proportion, and light, allowing every environment to grow more meaningful as it is lived in."
-      />
+      /> */}
       <ConditionalFooter />
     </>
   );

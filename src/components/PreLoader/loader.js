@@ -119,13 +119,13 @@ export const preLoaderAnim = () => {
     "<"
   );
 
-  gsap.to(".block", { zIndex: 10 });
+  gsap.to(".blocker", { zIndex: 10 });
 
   // -------------------------------------------------------
-  // 🔴 BLOCK EXIT + FINISH
+  // 🔴 blocker EXIT + FINISH
   // -------------------------------------------------------
   tl.to(
-    ".block",
+    ".blocker",
     {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
       duration: 1,

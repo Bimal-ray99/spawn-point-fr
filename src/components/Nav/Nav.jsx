@@ -236,41 +236,38 @@ const Nav = () => {
                 </a>
               </div>
               <div className="link">
-                <a
-                  href="/studio"
-                  onClick={(e) => handleLinkClick(e, "/studio")}
-                >
-                  <h2>Studio</h2>
+                <a href="/" onClick={(e) => handleLinkClick(e, "/studio")}>
+                  <h2>Tournaments</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                  href="/spaces"
-                  onClick={(e) => handleLinkClick(e, "/spaces")}
+                // href="/spaces"
+                // onClick={(e) => handleLinkClick(e, "/spaces")}
                 >
-                  <h2>Our Spaces</h2>
+                  <h2>About</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                  href="/sample-space"
-                  onClick={(e) => handleLinkClick(e, "/sample-space")}
+                // href="/sample-space"
+                // onClick={(e) => handleLinkClick(e, "/sample-space")}
                 >
-                  <h2>One Installation</h2>
+                  <h2>Gallery</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                  href="/blueprints"
-                  onClick={(e) => handleLinkClick(e, "/blueprints")}
+                // href="/blueprints"
+                // onClick={(e) => handleLinkClick(e, "/blueprints")}
                 >
-                  <h2>Blueprints</h2>
+                  <h2>Profile</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                  href="/connect"
-                  onClick={(e) => handleLinkClick(e, "/connect")}
+                // href="/connect"
+                // onClick={(e) => handleLinkClick(e, "/connect")}
                 >
                   <h2>Connect</h2>
                 </a>
@@ -282,7 +279,7 @@ const Nav = () => {
               <div className="sub-col">
                 <div className="menu-meta menu-commissions">
                   <p>Commissions</p>
-                  <p>build@terrene.studio</p>
+                  <p>build@spawn.point</p>
                   <p>+1 (872) 441‑2086</p>
                 </div>
                 <div className="menu-meta">
