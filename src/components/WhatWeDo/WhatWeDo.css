@@ -1,0 +1,375 @@
+/* What We Do Section - Enter the Arena */
+.what-we-do {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  @apply bg-background;
+}
+
+/* Timer UI Element */
+.what-we-do-timer {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.what-we-do-timer-dot {
+  width: 14px;
+  height: 14px;
+  @apply bg-primary;
+}
+
+.what-we-do-timer span {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  @apply text-primary;
+}
+
+/* Main Grid Layout */
+.what-we-do-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Left Text Side */
+.what-we-do-text-side {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem 4rem 6rem;
+  z-index: 10;
+}
+
+.what-we-do-left-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.what-we-do-text-content {
+  /* max-width: 600px; */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.what-we-do-heading-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.what-we-do-small-heading {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  display: inline-block;
+  margin-right: 1.5rem;
+  @apply font-DurkBoldItalic;
+  @apply text-primary;
+}
+
+.what-we-do-main-heading {
+  position: relative;
+  @apply bg-primary;
+  padding: 1.5rem 2rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    28px 100%,
+    0 calc(100% - 28px)
+  );
+  width: fit-content;
+  max-width: 680px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.what-we-do-main-heading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/elements/halftone.jpg");
+  background-size: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.what-we-do-main-heading .bg-ele {
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.what-we-do-main-heading h1 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  color: #ffffff;
+  @apply font-DurkBold;
+}
+
+.what-we-do-description {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #1f1f1f;
+  max-width: 480px;
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+
+.what-we-do-highlight {
+  @apply bg-primary;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+
+/* Background Text on Left */
+.what-we-do-bg-text {
+  position: absolute;
+  bottom: -4rem;
+  left: -2rem;
+  font-size: clamp(8rem, 20vw, 16rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(65, 105, 225, 0.15);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+  @apply font-DurkItalic;
+}
+
+/* Right Visual Side */
+.what-we-do-visual-side {
+  position: relative;
+  z-index: 3;
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  @apply bg-primary;
+  overflow: hidden;
+}
+
+.what-we-do-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.what-we-do-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.what-we-do-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* Large Background Text on Right */
+.what-we-do-bg-text-large {
+  position: absolute;
+  top: -8rem;
+  right: -3rem;
+  font-size: clamp(10rem, 25vw, 20rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.1);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+  @apply font-DurkItalic;
+}
+
+/* Character Image */
+.what-we-do-character {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.what-we-do-character-img {
+  width: auto;
+  height: auto;
+  max-width: 550px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+/* Decorative UI Dots */
+.what-we-do-ui-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  @apply bg-primary;
+  z-index: 40;
+}
+
+.what-we-do-ui-dot-top {
+  bottom: 12rem;
+  left: 3rem;
+  background-color: #1f1f1f;
+}
+
+.what-we-do-ui-dot-bottom {
+  bottom: 3rem;
+  right: 3rem;
+}
+
+/* Hashtag Element */
+.what-we-do-hashtag {
+  position: absolute;
+  top: 3rem;
+  left: 30vw;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 40;
+  @apply text-primary;
+}
+
+.what-we-do-hashtag-line {
+  width: 60px;
+  height: 2px;
+  @apply bg-primary;
+}
+
+.what-we-do-hashtag span {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  @apply text-primary;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1000px) {
+  .what-we-do {
+    min-height: 100vh;
+  }
+
+  .what-we-do-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .what-we-do-text-side {
+    padding: 8rem 2rem 4rem 2rem;
+    order: 2;
+  }
+
+  .what-we-do-text-content {
+    max-width: 100%;
+  }
+
+  .what-we-do-description {
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .what-we-do-visual-side {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 85%);
+    min-height: 60vh;
+    order: 1;
+  }
+
+  .what-we-do-character {
+    top: 30%;
+    left: 50%;
+  }
+
+  .what-we-do-character-img {
+    max-width: 400px;
+  }
+
+  .what-we-do-bg-text {
+    display: none;
+  }
+
+  .what-we-do-bg-text-large {
+    font-size: clamp(8rem, 30vw, 12rem);
+    top: -4rem;
+    right: -2rem;
+  }
+
+  .what-we-do-timer {
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .what-we-do-hashtag {
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .what-we-do-hashtag-line {
+    display: none;
+  }
+
+  .what-we-do-ui-dot-top {
+    display: none;
+  }
+
+  .what-we-do-corner-mask {
+    display: none;
+  }
+
+  .what-we-do-main-heading {
+    padding: 1.5rem 2rem;
+    max-width: 95%;
+  }
+
+  .what-we-do-main-heading h1 {
+    font-size: clamp(1.5rem, 13vw, 5rem);
+  }
+
+  .what-we-do-small-heading {
+    padding-left: 0;
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+}

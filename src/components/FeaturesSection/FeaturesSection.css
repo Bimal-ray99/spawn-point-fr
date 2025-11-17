@@ -1,0 +1,32 @@
+/* Feature Card Styles */
+.feature-card {
+  will-change: transform, opacity, background-color;
+  transform-origin: center;
+}
+
+/* Smooth font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve card hover performance */
+@media (hover: hover) {
+  .feature-card {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.7s ease,
+                border-color 0.7s ease,
+                box-shadow 0.7s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+}
+
+/* Adjust card spacing on mobile */
+@media (max-width: 768px) {
+  .feature-card {
+    border-radius: 1rem;
+  }
+}

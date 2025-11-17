@@ -1,0 +1,345 @@
+/* Refresh Section Styles */
+.refresh-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+/* Grid Layout */
+.refresh-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 80vh;
+  align-items: center;
+}
+
+/* Left Side - Image */
+.refresh-image-side {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: visible;
+}
+
+.refresh-image-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Shapes */
+.refresh-bg-shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  background: #0057ff;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 10%;
+  opacity: 0.8;
+  animation: morphShape 8s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  left: 0%;
+  opacity: 0.6;
+  animation: morphShape 10s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+  width: 150px;
+  height: 150px;
+  bottom: 10%;
+  right: 30%;
+  opacity: 0.7;
+  animation: morphShape 6s ease-in-out infinite;
+}
+
+@keyframes morphShape {
+  0%,
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+}
+
+/* Food Plate */
+.refresh-food-plate {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.plate-shadow {
+  position: absolute;
+  inset: 20px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.food-image-placeholder {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  height: 90%;
+  background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fruit Decorations */
+.fruit-decoration {
+  position: absolute;
+  font-size: 2rem;
+  z-index: 15;
+  animation: float 3s ease-in-out infinite;
+}
+
+.fruit-1 {
+  top: 5%;
+  right: 15%;
+  animation-delay: 0s;
+}
+
+.fruit-2 {
+  bottom: 30%;
+  left: 5%;
+  animation-delay: 1s;
+}
+
+.fruit-3 {
+  bottom: 15%;
+  right: 10%;
+  font-size: 1.5rem;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Right Side - Text Content */
+.refresh-text-side {
+  position: relative;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.refresh-right-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.refresh-text-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Headings */
+.refresh-heading-wrapper {
+  margin-bottom: 2rem;
+}
+
+.refresh-small-heading {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: #0057ff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.refresh-main-heading {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.bg-ele-blue {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #0057ff;
+  opacity: 0.1;
+  border-radius: 50%;
+  filter: blur(40px);
+  top: -50px;
+  left: -50px;
+  z-index: 0;
+}
+
+.refresh-main-heading h1 {
+  position: relative;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+  color: #0057ff;
+  text-transform: uppercase;
+  z-index: 1;
+  font-weight: 900;
+}
+
+/* Description */
+.refresh-description {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: #333;
+  max-width: 500px;
+}
+
+.refresh-highlight {
+  color: #0057ff;
+  font-weight: 600;
+}
+
+/* Decorative UI Elements */
+.refresh-ui-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #0057ff;
+  border-radius: 50%;
+  z-index: 20;
+}
+
+.refresh-ui-dot-top {
+  top: 3rem;
+  right: 3rem;
+}
+
+.refresh-ui-dot-bottom {
+  bottom: 3rem;
+  left: 3rem;
+}
+
+/* Hashtag */
+.refresh-hashtag {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #0057ff;
+  z-index: 20;
+}
+
+.refresh-hashtag-line {
+  width: 50px;
+  height: 2px;
+  background: #0057ff;
+}
+
+/* Corner Mask */
+.mask-right-corner {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .refresh-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 1rem;
+  }
+
+  .refresh-image-side {
+    order: 2;
+  }
+
+  .refresh-text-side {
+    order: 1;
+    padding: 2rem 1rem;
+  }
+
+  .refresh-food-plate {
+    width: 300px;
+    height: 300px;
+  }
+
+  .shape-1,
+  .shape-2,
+  .shape-3 {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .refresh-section {
+    padding: 2rem 0;
+  }
+
+  .refresh-food-plate {
+    width: 250px;
+    height: 250px;
+  }
+
+  .refresh-main-heading h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .fruit-decoration {
+    font-size: 1.5rem;
+  }
+
+  .mask-right-corner {
+    display: none;
+  }
+}
