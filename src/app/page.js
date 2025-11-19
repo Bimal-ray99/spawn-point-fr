@@ -64,8 +64,8 @@ export default function Home() {
       <WhatWeDo />
       <ChampionSection />
       <FeaturesSection />
-      <Vr />
-      <Vrcard />
+      {/* <Vr />
+      <Vrcard /> */}
       <RefreshSection/>
       {/* <ClientReviewsSection />
       <GalleryCallout />

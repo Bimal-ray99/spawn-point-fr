@@ -6,6 +6,24 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        md: "2rem",
+        lg: "3rem",
+        xl: "4rem",
+        "2xl": "5rem",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
         base: {
@@ -31,6 +49,39 @@ module.exports = {
         DurkItalic: ["DurkItalic", "sans-serif"],
         DurkBold: ["DurkBold", "sans-serif"],
         DurkBoldItalic: ["DurkBoldItalic", "sans-serif"],
+      },
+      fontSize: {
+        // Fluid responsive sizes
+        "fluid-xs": "clamp(0.75rem, 1.5vw, 0.875rem)",
+        "fluid-sm": "clamp(0.875rem, 2vw, 1rem)",
+        "fluid-base": "clamp(1rem, 2.5vw, 1.125rem)",
+        "fluid-lg": "clamp(1.125rem, 3vw, 1.5rem)",
+        "fluid-xl": "clamp(1.25rem, 3.5vw, 2rem)",
+        "fluid-2xl": "clamp(1.5rem, 4vw, 2.5rem)",
+        "fluid-3xl": "clamp(2rem, 5vw, 3rem)",
+        "fluid-4xl": "clamp(2.5rem, 6vw, 4rem)",
+        "fluid-5xl": "clamp(3rem, 8vw, 5rem)",
+        "fluid-6xl": "clamp(3.5rem, 10vw, 6rem)",
+        "fluid-7xl": "clamp(4rem, 12vw, 8rem)",
+        "fluid-8xl": "clamp(5rem, 15vw, 10rem)",
+      },
+      spacing: {
+        "section-xs": "3rem",
+        "section-sm": "4rem",
+        "section-md": "6rem",
+        "section-lg": "8rem",
+        "section-xl": "10rem",
+      },
+      maxWidth: {
+        content: "65ch",
+        prose: "75ch",
+        card: "28rem",
+        "card-lg": "32rem",
+        "container-sm": "640px",
+        "container-md": "768px",
+        "container-lg": "1024px",
+        "container-xl": "1280px",
+        "container-2xl": "1400px",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out forwards",

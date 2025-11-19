@@ -15,39 +15,20 @@ const features = [
 export default function FeaturesSection() {
   const section2Ref = useRef(null);
 
-  // Scroll animation only for vertical text
-  const { scrollYProgress } = useScroll({
-    target: section2Ref,
-    offset: ["start end", "end start"],
-  });
-
-  const verticalTextY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-
   return (
     <>
       {/* SECTION 1 — BLUE TITLE AREA */}
-      <section className="relative py-20 md:py-32 min-h-screen overflow-hidden bg-primary">
+      <section className="relative section-spacing min-h-screen overflow-hidden bg-primary">
         <div className="bg-ele"></div>
-        <div className="container mx-auto px-4 md:px-8 lg:px-16">
-          <div className="w-full h-48 md:h-64 lg:h-80 bg-white/5 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10">
-            <p className="text-white/30 text-sm md:text-base">
+        <div className="content-container">
+          <div className="w-full h-48 md:h-64 lg:h-80 bg-white/5 rounded-2xl flex-center backdrop-blur-sm border border-white/10">
+            <p className="body-sm text-white/30">
               [CASSETTE IMAGE PLACEHOLDER]
             </p>
           </div>
 
           <Copy delay={0.2}>
-            <h2
-              className="
-              text-center 
-              text-white 
-              font-DurkBold 
-              uppercase
-              text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl
-              leading-[0.85]
-              tracking-[-0.02em]
-              mt-16
-            "
-            >
+            <h2 className="heading-display-lg text-center text-white font-DurkBold uppercase leading-[0.85] tracking-[-0.02em] mt-16">
               Unlock More with
               <br />
               Your Keycard
@@ -59,15 +40,12 @@ export default function FeaturesSection() {
       {/* SECTION 2 — FEATURES */}
       <section
         ref={section2Ref}
-        className="relative py-20 md:py-32 lg:py-40 overflow-hidden bg-gradient-to-b
-    from-primary
-    via-white
-    to-white"
+        className="relative section-spacing-lg overflow-hidden bg-gradient-to-b from-primary via-white to-white"
       >
-        <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        <div className="content-container">
           <div className="relative flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 lg:items-center">
             {/* LEFT SIDE — VERTICAL SCROLLING TEXT + TITLE */}
-            <div className=" relative">
+            <div className="relative">
               {/* Vertical scrolling text */}
               <div className="rotate-90">
                 <ScrollingText
@@ -87,10 +65,7 @@ export default function FeaturesSection() {
               </div>
 
               {/* Main title */}
-              <h2
-                className="font-DurkBold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl
-              leading-[0.85] text-black uppercase relative z-10 lg:ml-12 xl:ml-24"
-              >
+              <h2 className="heading-display-lg font-DurkBold leading-[0.85] text-black uppercase relative z-10 lg:ml-12 xl:ml-24">
                 FEATURES WE'VE
                 <br /> BUILT SO
                 <br /> YOU GET MORE
@@ -100,7 +75,7 @@ export default function FeaturesSection() {
 
             {/* RIGHT SIDE — CARDS */}
             <div className="lg:w-[55%] xl:w-[58%]">
-              <div className="w-full max-w-xl xl:max-w-2xl space-y-6 md:space-y-8">
+              <div className="w-full max-w-card-lg xl:max-w-2xl gap-content-sm">
                 {features.map((feature, index) => (
                   <FeatureCard key={index} feature={feature} />
                 ))}
@@ -128,22 +103,7 @@ function FeatureCard({ feature }) {
     <motion.div
       ref={cardRef}
       style={{ opacity, y }}
-      className="
-        feature-card
-        group
-        relative
-        bg-white/90
-        backdrop-blur-sm
-        border-2 border-black/20
-        rounded-2xl
-        p-8 md:p-10 lg:p-12
-        hover:bg-secondary
-        hover:border-secondary
-        cursor-pointer
-        overflow-hidden
-        shadow-[0_4px_20px_rgba(0,0,0,0.06)]
-        hover:shadow-[0_20px_60px_rgba(255,23,217,0.3)]
-      "
+      className="feature-card group relative bg-white/90 backdrop-blur-sm border-2 border-black/20 rounded-2xl card-padding-lg hover:bg-secondary hover:border-secondary cursor-pointer overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_60px_rgba(255,23,217,0.3)] mb-6"
     >
       {/* Halftone background on hover */}
       <div
@@ -158,11 +118,11 @@ function FeatureCard({ feature }) {
 
       {/* Content */}
       <div className="relative text-center z-10">
-        <span className="text-xs md:text-sm font-mono tracking-[0.2em] text-black/60 group-hover:text-black/80 uppercase transition-colors duration-500">
+        <span className="fluid-text-xs font-mono tracking-[0.2em] text-black/60 group-hover:text-black/80 uppercase transition-colors duration-500 block mb-4">
           [ FEATURE {feature.id} ]
         </span>
 
-        <h3 className="font-DurkBold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.1] text-black group-hover:text-black transition-all duration-500 uppercase">
+        <h3 className="heading-card font-DurkBold leading-[1.1] text-black group-hover:text-black transition-all duration-500 uppercase">
           {feature.title}
         </h3>
       </div>

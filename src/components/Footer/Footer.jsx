@@ -47,16 +47,18 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-meta">
-        <div className="container footer-meta-header">
+        <div className="footer-meta-header">
           <div className="footer-meta-col">
             <div className="footer-meta-block">
               <div className="footer-meta-logo">
                 <Copy delay={0.1}>
-                  <h3 className="lg">Spawn Point</h3>
+                  <h3 className="heading-card">Spawn Point</h3>
                 </Copy>
               </div>
               <Copy delay={0.2}>
-                <h2>Spaces made simple, thoughtful, lasting.</h2>
+                <p className="">
+                  Spaces made simple, thoughtful, lasting.
+                </p>
               </Copy>
             </div>
           </div>
@@ -69,17 +71,19 @@ const Footer = () => {
                     e.preventDefault();
                     navigateWithTransition("/");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>Index</h3>
+                  Index
                 </a>
-                {/* <a
+                <a
                   href="/studio"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateWithTransition("/studio");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>Studio</h3>
+                  Studio
                 </a>
                 <a
                   href="/spaces"
@@ -87,8 +91,9 @@ const Footer = () => {
                     e.preventDefault();
                     navigateWithTransition("/spaces");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>Our Spaces</h3>
+                  Our Spaces
                 </a>
                 <a
                   href="/sample-space"
@@ -96,8 +101,9 @@ const Footer = () => {
                     e.preventDefault();
                     navigateWithTransition("/sample-space");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>One Installation</h3>
+                  One Installation
                 </a>
                 <a
                   href="/blueprints"
@@ -105,8 +111,9 @@ const Footer = () => {
                     e.preventDefault();
                     navigateWithTransition("/blueprints");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>Blueprints</h3>
+                  Blueprints
                 </a>
                 <a
                   href="/connect"
@@ -114,14 +121,15 @@ const Footer = () => {
                     e.preventDefault();
                     navigateWithTransition("/connect");
                   }}
+                  className="heading-subsection"
                 >
-                  <h3>Connect</h3>
-                </a> */}
+                  Connect
+                </a>
               </Copy>
             </div>
           </div>
         </div>
-        <div className="container footer-socials">
+        <div className="footer-socials">
           <div className="footer-meta-col">
             <div className="footer-socials-wrapper" ref={socialIconsRef}>
               <div className="icon">
@@ -138,9 +146,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="footer-meta-col">
+          <div className="footer-meta-col ">
             <Copy delay={0.1}>
-              <p>
+              <p className="">
                 We believe design is not decoration but the quiet structure that
                 shapes experience.
               </p>
@@ -149,7 +157,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-outro">
-        <div className="container">
+        <div className="footer-outro-container">
           <div className="footer-header">
             <img src="/logos/terrene-footer-logo.svg" alt="" />
           </div>

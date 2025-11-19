@@ -21,11 +21,22 @@ export const RefreshSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-white"
+      className="relative min-h-screen w-full overflow-hidden bg-background section-spacing"
       aria-label="Refresh Section"
     >
-      {/* Scrolling background text */}
-      <div className="rotate-[84deg]">
+      {/* Background Elements - Full Section */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/elements/bgele.svg"
+          alt=""
+          fill
+          className="object-cover opacity-50"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Scrolling background text - Hidden on mobile */}
+      <div className="hidden lg:block rotate-[84deg]">
         <ScrollingText
           text="EnterThe"
           direction="leftToRight"
@@ -34,9 +45,9 @@ export const RefreshSection = () => {
         />
       </div>
 
-      {/* Blue masked block - Left side */}
+      {/* Blue masked block - Left side - Hidden on mobile */}
       <div
-        className="absolute left-0 top-0 z-10 bg-primary h-full w-[40%]"
+        className="hidden lg:block absolute left-0 top-0 z-10 bg-primary h-full w-[40%]"
         style={{
           clipPath: "polygon(0% 0%, 0% 0%, 10% 100%, 0% 100%)",
         }}
@@ -53,73 +64,178 @@ export const RefreshSection = () => {
         </div>
       </div>
 
-      {/* Main Content - Right Side Stacked Vertically */}
-      <div className="absolute right-8 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 z-30 flex flex-col items-end">
-        {/* REFRESH */}
-        <div className="relative text-right mb-2">
-          <h2 className="text-[clamp(3.5rem,10vw,10rem)] font-black uppercase leading-[0.85] tracking-tighter text-primary italic">
-            REFRESH
-          </h2>
+      {/* Mobile Version */}
+      <div className="block lg:hidden">
+        <div className="flex-col-center text-center content-container relative z-30">
+          {/* REFRESH */}
+          <div className="relative">
+            <Copy delay={0.1}>
+              <h2 className="heading-section pb-6 font-DurkBoldItalic uppercase leading-[0.85] text-primary italic">
+                REFRESH
+              </h2>
+            </Copy>
+          </div>
+
+          {/* REFUEL */}
+          <div className="relative -mt-2">
+            <Copy delay={0.15}>
+              <h2 className="heading-section pb-6 font-DurkBoldItalic uppercase leading-[0.85] text-primary italic">
+                REFUEL
+              </h2>
+            </Copy>
+          </div>
+
+          {/* RESPAWN - With blue background and clip-path */}
+          <div
+            className="relative bg-primary text-white px-8 py-4 w-fit overflow-hidden font-DurkBoldItalic uppercase inline-block mt-2 before:content-[''] before:absolute before:inset-0 before:bg-[url('/elements/halftone.jpg')] before:bg-cover before:mix-blend-multiply before:opacity-10 before:pointer-events-none before:z-[1]"
+            style={{
+              clipPath:
+                "polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px))",
+            }}
+          >
+            {/* bg-ele layer */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-10">
+              <Image
+                src="/elements/bgele.svg"
+                alt=""
+                fill
+                className="object-cover"
+                aria-hidden="true"
+              />
+            </div>
+            <Copy delay={0.2}>
+              <h2 className="heading-section leading-[0.85] relative z-10 italic">
+                RESPAWN
+              </h2>
+            </Copy>
+          </div>
+
+          {/* Description Text */}
+          <div className="mt-6 max-w-prose">
+            <Copy delay={0.3}>
+              <p className="body-sm text-gray-800 uppercase tracking-wide mb-4 font-semibold">
+                FUEL YOUR GAME WITH MOUTH-WATERING BITES, COOL SHAKES, AND
+                ENERGY-PACKED
+              </p>
+            </Copy>
+            <div className="bg-primary text-white px-4 py-2 rounded inline-block">
+              <p className="body-sm font-semibold uppercase">
+                TREATS—MADE FOR GAMERS, SERVED WITH FLAVOR.
+              </p>
+            </div>
+          </div>
+
+          {/* Food Image - Mobile */}
+          <motion.div
+            className="mt-8 relative w-full flex justify-center"
+            style={{ rotate }}
+          >
+            <Image
+              src="/home/food-01.png"
+              alt="Gamer food plate"
+              width={350}
+              height={350}
+              className="w-[300px] h-[300px] md:w-[350px] md:h-[350px] object-contain"
+              priority
+            />
+          </motion.div>
         </div>
 
-        {/* REFUEL */}
-        <div className="relative text-right mb-2">
-          <h2 className="text-[clamp(3.5rem,10vw,10rem)] font-black uppercase leading-[0.85] tracking-tighter text-primary italic">
-            REFUEL
-          </h2>
-        </div>
-
-        {/* RESPAWN - With blue background and skew */}
-        <div className="what-we-do-main-heading">
-          <div className="bg-ele"></div>
-          <Copy delay={0.2}>
-            <h1>Respawn</h1>
-          </Copy>
-        </div>
-
-        {/* Description Text */}
-        <div className="max-w-xl lg:max-w-2xl text-right">
-          <p className="text-sm md:text-base lg:text-lg font-semibold leading-relaxed text-gray-900 uppercase tracking-wide">
-            FUEL YOUR GAME WITH MOUTH-WATERING BITES, COOL SHAKES, AND
-            ENERGY-PACKED{" "}
-            <span className="inline-block bg-primary px-2 py-1 text-white">
-              TREATS—MADE FOR GAMERS, SERVED WITH FLAVOR.
-            </span>
-          </p>
+        {/* Blue decorative block - Mobile */}
+        <div
+          className="absolute left-0 bottom-0 z-0 bg-primary h-[120px] w-full"
+          style={{
+            clipPath: "polygon(0 40%, 100% 0%, 100% 100%, 0% 100%)",
+          }}
+          aria-hidden="true"
+        >
+          <div className="halftone-overlay opacity-[3%]" />
+          <div>
+            <div className="halftone-overlay opacity-[5%]" />
+            <img
+              src="/home/img.webp"
+              alt="wellness-sanctuary-image"
+              className="min-h-screen w-full object-cover opacity-30"
+            />
+          </div>
         </div>
       </div>
 
-      {/* Rotating Food Image - Left side */}
-      <motion.div
-        className="absolute top-1/4 left-12 md:left-20 lg:left-32 -translate-y-1/2 z-20"
-        aria-hidden="true"
-        ref={imageRef}
-        style={{ rotate }}
-      >
-        <Image
-          src="/home/food-01.png"
-          alt="Gamer food plate"
-          width={450}
-          height={450}
-          className="w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] object-contain"
-          priority
-        />
-      </motion.div>
+      {/* Desktop Layout */}
+      <div className="hidden lg:block">
+        {/* Main Content - Right Side Stacked Vertically */}
+        <div className="absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 z-30 flex flex-col items-end gap-content-xs">
+          {/* REFRESH */}
+          <div className="relative">
+            <Copy delay={0.1}>
+              <h2 className="heading-display-lg pb-6 font-DurkBoldItalic uppercase leading-[0.9] text-primary italic">
+                REFRESH
+              </h2>
+            </Copy>
+          </div>
 
-      {/* Decorative Elements - Floating ingredients */}
-      <div className="absolute top-20 right-[35%] z-15">
+          {/* REFUEL */}
+          <div className="relative">
+            <Copy delay={0.15}>
+              <h2 className="heading-display-lg pb-6 font-DurkBoldItalic uppercase leading-[0.9] text-primary italic">
+                REFUEL
+              </h2>
+            </Copy>
+          </div>
+
+          {/* RESPAWN - With blue background and clip-path */}
+          <div
+            className="relative bg-primary text-white px-6 py-3 md:px-8 md:py-4 w-fit overflow-hidden font-DurkBoldItalic uppercase inline-block before:content-[''] before:absolute before:inset-0 before:bg-[url('/elements/halftone.jpg')] before:bg-cover before:mix-blend-multiply before:opacity-10 before:pointer-events-none before:z-[1]"
+            style={{
+              clipPath:
+                "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))",
+            }}
+          >
+            {/* bg-ele layer */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-10">
+              <Image
+                src="/elements/bgele.svg"
+                alt=""
+                fill
+                className="object-cover"
+                aria-hidden="true"
+              />
+            </div>
+            <Copy delay={0.2}>
+              <h2 className="heading-display-lg leading-[0.9] relative z-10 italic">
+                RESPAWN
+              </h2>
+            </Copy>
+          </div>
+
+          {/* Description Text */}
+          <div className="max-w-content text-right mt-6">
+            <Copy delay={0.3}>
+              <p className="body-lg font-semibold leading-relaxed text-gray-900">
+                Fuel your game with mouth-watering bites, cool shakes, and
+                energy-packed{" "}
+                <span className="bg-primary text-white px-3 py-1 font-extrabold uppercase rounded whitespace-nowrap">
+                  treats—made for gamers!
+                </span>
+              </p>
+            </Copy>
+          </div>
+        </div>
+
+        {/* Rotating Food Image - Left side - Desktop only */}
         <motion.div
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 10, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute top-1/4 left-32 -translate-y-1/2 z-20"
+          aria-hidden="true"
+          style={{ rotate }}
         >
-          {/* Add strawberry or other decorative image here if needed */}
+          <Image
+            src="/home/food-01.png"
+            alt="Gamer food plate"
+            width={750}
+            height={750}
+            className="w-[600px] h-[600px] object-contain"
+            priority
+          />
         </motion.div>
       </div>
     </section>
