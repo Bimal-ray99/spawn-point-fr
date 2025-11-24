@@ -1,70 +1,58 @@
 "use client";
+import { useViewTransition } from "@/hooks/useViewTransition";
 import "./TopBar.css";
 
-import { useRef, useEffect } from "react";
-
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-import { useViewTransition } from "@/hooks/useViewTransition";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
 
-gsap.registerPlugin(ScrollTrigger);
+// ... existing imports
 
 const TopBar = () => {
   const topBarRef = useRef(null);
   const { navigateWithTransition } = useViewTransition();
+  const pathname = usePathname();
+  const router = useRouter();
   let lastScrollY = 0;
   let isScrolling = false;
 
+  // ... existing scroll effect code ...
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-    const topBar = topBarRef.current;
-    if (!topBar) return;
+    // Check for token to determine login state
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
 
-    const topBarHeight = topBar.offsetHeight;
-
-    gsap.set(topBar, { y: 0 });
-
-    const handleScroll = () => {
-      if (isScrolling) return;
-
-      isScrolling = true;
-      const currentScrollY = window.scrollY;
-      const direction = currentScrollY > lastScrollY ? 1 : -1;
-
-      if (direction === 1 && currentScrollY > 50) {
-        gsap.to(topBar, {
-          y: -topBarHeight,
-          duration: 1,
-          ease: "power4.out",
-        });
-      } else if (direction === -1) {
-        gsap.to(topBar, {
-          y: 0,
-          duration: 1,
-          ease: "power4.out",
-        });
-      }
-
-      lastScrollY = currentScrollY;
-
-      setTimeout(() => {
-        isScrolling = false;
-      }, 100);
+    // Listen for storage events to update state across tabs/windows
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("storage", handleStorageChange);
+    // Custom event for same-tab updates (e.g. after login/logout)
+    window.addEventListener("auth-change", handleStorageChange);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("auth-change", handleStorageChange);
     };
   }, []);
 
-  useEffect(() => {
-    if (topBarRef.current) {
-      gsap.set(topBarRef.current, { y: 0 });
-    }
-  });
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.dispatchEvent(new Event("auth-change"));
+    toast.success("Logged out successfully");
+    router.push("/login");
+  };
+
+  const isProfilePage = pathname === "/profile";
+
+  if (isProfilePage) return null;
 
   return (
     <div className="top-bar" ref={topBarRef}>
@@ -80,7 +68,11 @@ const TopBar = () => {
         </a>
       </div>
       <div className="top-bar-cta">
-        <AnimatedButton label="Login" route="/login" animate={false} />
+        <AnimatedButton
+          label={isLoggedIn ? "Profile" : "Login"}
+          route={isLoggedIn ? "/profile" : "/login"}
+          animate={false}
+        />
       </div>
     </div>
   );

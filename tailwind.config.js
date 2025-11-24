@@ -42,6 +42,9 @@ module.exports = {
         secondary: "#ff17d9",
         marquee: "#004d43",
         about: "#cdea68",
+        "spark-orange": "#FF5C00",
+        "spark-cyan": "#00C2FF",
+        "spark-purple": "#6C5DD3",
       },
       fontFamily: {
         sans: ["Manrope", "sans-serif"],

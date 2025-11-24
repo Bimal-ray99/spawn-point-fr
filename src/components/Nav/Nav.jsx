@@ -191,15 +191,23 @@ const Nav = () => {
     }
   }, [isAnimating, isNavigating]);
 
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("menu-open");
+    };
+  }, []);
+
   const handleLinkClick = useCallback(
     (e, href) => {
       e.preventDefault();
 
       const currentPath = window.location.pathname;
+
+      if (isOpen) {
+        setIsOpen(false);
+      }
+
       if (currentPath === href) {
-        if (isOpen) {
-          setIsOpen(false);
-        }
         return;
       }
 
@@ -258,16 +266,16 @@ const Nav = () => {
               </div>
               <div className="link">
                 <a
-                // href="/blueprints"
-                // onClick={(e) => handleLinkClick(e, "/blueprints")}
+                  href="/profile"
+                  onClick={(e) => handleLinkClick(e, "/profile")}
                 >
                   <h2>Profile</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                // href="/connect"
-                // onClick={(e) => handleLinkClick(e, "/connect")}
+                  href="/profile"
+                  onClick={(e) => handleLinkClick(e, "/profile")}
                 >
                   <h2>Connect</h2>
                 </a>

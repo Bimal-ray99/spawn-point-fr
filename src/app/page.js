@@ -66,7 +66,7 @@ export default function Home() {
       <FeaturesSection />
       {/* <Vr />
       <Vrcard /> */}
-      <RefreshSection/>
+      <RefreshSection />
       {/* <ClientReviewsSection />
       <GalleryCallout />
       <CTAWindow
@@ -75,7 +75,6 @@ export default function Home() {
         callout="Spaces that breathe with time"
         description="Our approach is guided by rhythm, proportion, and light, allowing every environment to grow more meaningful as it is lived in."
       /> */}
-      <ConditionalFooter />
     </>
   );
 }
