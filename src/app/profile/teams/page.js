@@ -51,16 +51,19 @@ export default function TeamsPage() {
 
       const headers = { Authorization: `Bearer ${token}` };
 
-      const [teamsRes, invitationsRes] = await Promise.all([
+      const [teamsRes, invitationsRes, sentInvitationsRes] = await Promise.all([
         fetch("/api/profile/teams/my", { headers }),
         fetch("/api/profile/teams/invitations/my?status=pending", { headers }),
+        fetch("/api/profile/teams/invitations/sent", { headers }),
       ]);
 
       const teamsData = await teamsRes.json();
       const invitationsData = await invitationsRes.json();
+      const sentInvitationsData = await sentInvitationsRes.json();
 
       console.log("Teams data:", teamsData);
       console.log("Invitations data:", invitationsData);
+      console.log("Sent invitations data:", sentInvitationsData);
 
       if (teamsData.success) {
         const teams = Array.isArray(teamsData.data)
@@ -90,9 +93,12 @@ export default function TeamsPage() {
         setInvitations(invites);
       }
 
-      // TODO: Backend doesn't support status=sent for invitations
-      // Need to find the correct endpoint for sent invitations
-      setSentInvitations([]);
+      if (sentInvitationsData.success) {
+        const sentInvites = Array.isArray(sentInvitationsData.data)
+          ? sentInvitationsData.data
+          : sentInvitationsData.data?.invitations || [];
+        setSentInvitations(sentInvites);
+      }
     } catch (error) {
       console.error("Error fetching teams data:", error);
       toast.error("Failed to load teams");

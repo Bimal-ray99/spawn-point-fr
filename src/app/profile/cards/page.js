@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { RefreshCw, X, Check, Crown } from "lucide-react";
+import { RefreshCw, X, Check, Crown, Tag } from "lucide-react";
 import { MemberCard } from "@/components/profile/MemberCard";
+import PaginationControl from "@/components/PaginationControl";
 
 export default function CardsPage() {
   const router = useRouter();
@@ -13,10 +14,13 @@ export default function CardsPage() {
   const [tiers, setTiers] = useState([]);
   const [rechargePacks, setRechargePacks] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [showRechargeModal, setShowRechargeModal] = useState(false);
   const [selectedPack, setSelectedPack] = useState(null);
   const [isRecharging, setIsRecharging] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
   const [user, setUser] = useState({ name: "User" });
 
   const activeCard = cards.find((card) => card.status === "active");
@@ -24,6 +28,12 @@ export default function CardsPage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (activeCard) {
+      fetchTransactions(activeCard._id, currentPage);
+    }
+  }, [currentPage, activeCard?._id]);
 
   const fetchData = async () => {
     try {
@@ -67,12 +77,7 @@ export default function CardsPage() {
           (card) => card.status === "active"
         );
         if (activeCard) {
-          const transRes = await fetch(
-            `/api/profile/cards/${activeCard._id}/transactions`,
-            { headers }
-          );
-          const transData = await transRes.json();
-          setTransactions(transData.data?.transactions || []);
+          fetchTransactions(activeCard._id, 1);
         }
       }
 
@@ -120,6 +125,24 @@ export default function CardsPage() {
     }
   };
 
+  const fetchTransactions = async (cardId, page = 1) => {
+    try {
+      const token = localStorage.getItem("token");
+      const headers = { Authorization: `Bearer ${token}` };
+      const res = await fetch(
+        `/api/profile/cards/${cardId}/transactions?page=${page}&limit=10`,
+        { headers }
+      );
+      const data = await res.json();
+      if (data.success) {
+        setTransactions(data.data?.transactions || []);
+        setTotalPages(data.data?.pagination?.totalPages || 1);
+      }
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+  };
+
   const handleRecharge = async () => {
     if (!activeCard || !selectedPack) {
       toast.error("Please select a recharge pack");
@@ -139,6 +162,7 @@ export default function CardsPage() {
           rechargePackId: selectedPack._id,
           paymentMethod: "card",
           paymentId: "pi_123",
+          couponCode: couponCode || undefined,
         }),
       });
 
@@ -147,6 +171,7 @@ export default function CardsPage() {
         toast.success("Card recharged successfully!");
         setShowRechargeModal(false);
         setSelectedPack(null);
+        setCouponCode("");
         fetchData(); // Refresh data
       } else {
         toast.error(data.error?.message || "Failed to recharge card");
@@ -389,6 +414,17 @@ export default function CardsPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-8 flex justify-center">
+                <PaginationControl
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -438,6 +474,23 @@ export default function CardsPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Coupon Code */}
+            <div className="mb-8">
+              <label className="mb-2 block text-xs font-bold uppercase text-gray-500">
+                Coupon Code (Optional)
+              </label>
+              <div className="relative">
+                <Tag className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Enter promo code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  className="w-full rounded-xl border-gray-200 bg-gray-50 p-3 pl-10 font-bold focus:border-spark-cyan focus:ring-spark-cyan"
+                />
+              </div>
             </div>
 
             <button

@@ -4,7 +4,9 @@ export async function GET(request, { params }) {
   try {
     const baseUrl = process.env.API_BASE_URL || "http://localhost:4000/api";
     const { cardId } = await params;
-    const url = `${baseUrl}/v1/cards/${cardId}/transactions`;
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.toString();
+    const url = `${baseUrl}/v1/cards/${cardId}/transactions?${query}`;
 
     const authHeader = request.headers.get("authorization");
     const headers = {

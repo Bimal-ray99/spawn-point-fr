@@ -25,6 +25,10 @@ export default function Profile() {
   const [activeBooking, setActiveBooking] = useState(null);
   const [timeLeft, setTimeLeft] = useState("");
 
+  const [quests, setQuests] = useState([]);
+  const [participations, setParticipations] = useState([]);
+  const [actionLoading, setActionLoading] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -94,6 +98,105 @@ export default function Profile() {
 
     fetchData();
   }, [router]);
+
+  useEffect(() => {
+    const fetchQuests = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const headers = { Authorization: `Bearer ${token}` };
+
+        // Fetch Quests
+        const questsRes = await fetch(`/api/profile/quests/${questFilter}`, {
+          headers,
+        });
+        const questsData = await questsRes.json();
+
+        // Fetch Participations
+        const participationsRes = await fetch(
+          "/api/profile/quests/my-participations",
+          { headers }
+        );
+        const participationsData = await participationsRes.json();
+
+        if (questsData.success) {
+          setQuests(questsData.data || []);
+        }
+        if (participationsData.success) {
+          setParticipations(participationsData.data || []);
+        }
+      } catch (error) {
+        console.error("Error fetching quests:", error);
+      }
+    };
+
+    fetchQuests();
+  }, [questFilter]);
+
+  const handleJoinQuest = async (questId) => {
+    setActionLoading(questId);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/profile/quests/${questId}/join`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success("Quest started!");
+        // Refresh participations
+        const participationsRes = await fetch(
+          "/api/profile/quests/my-participations",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const participationsData = await participationsRes.json();
+        if (participationsData.success) {
+          setParticipations(participationsData.data || []);
+        }
+      } else {
+        toast.error(data.error?.message || "Failed to join quest");
+      }
+    } catch (error) {
+      toast.error("Failed to join quest");
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleClaimQuest = async (questId) => {
+    setActionLoading(questId);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/profile/quests/${questId}/claim-reward`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success("Reward claimed!");
+        // Refresh participations
+        const participationsRes = await fetch(
+          "/api/profile/quests/my-participations",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const participationsData = await participationsRes.json();
+        if (participationsData.success) {
+          setParticipations(participationsData.data || []);
+        }
+        // Refresh user points (optional, but good UX)
+        window.dispatchEvent(new Event("user-updated"));
+      } else {
+        toast.error(data.error?.message || "Failed to claim reward");
+      }
+    } catch (error) {
+      toast.error("Failed to claim reward");
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   useEffect(() => {
     if (!activeBooking) return;
@@ -334,32 +437,47 @@ export default function Profile() {
             </div>
 
             <div className="space-y-4">
-              <QuestRow
-                title="Reach Season Level 37"
-                reward="400 XP"
-                type="RARE"
-                status="completed"
-              />
-              <QuestRow
-                title="Collector Score - 10,000+"
-                reward="400 XP"
-                type="EPIC"
-                status="completed"
-              />
-              <QuestRow
-                title="Win 3 Matches in Arena"
-                reward="900 XP"
-                type="RARE"
-                status="in-progress"
-                progress={1}
-                total={3}
-              />
-              <QuestRow
-                title="Follow us on X"
-                reward="200 XP"
-                type="LEGENDARY"
-                status="claimable"
-              />
+              {isLoading ? (
+                <div className="flex h-32 items-center justify-center">
+                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-spark-orange border-t-transparent" />
+                </div>
+              ) : !Array.isArray(quests) || quests.length === 0 ? (
+                <div className="rounded-xl bg-white p-8 text-center shadow-sm">
+                  <p className="text-gray-500">No active quests found.</p>
+                </div>
+              ) : (
+                quests.slice(0, 4).map((quest) => {
+                  const participation = participations.find(
+                    (p) => p.questId === quest._id
+                  );
+                  const status = participation
+                    ? participation.rewardClaimed
+                      ? "claimed"
+                      : participation.isWinner
+                      ? "claimable"
+                      : participation.completed
+                      ? "completed"
+                      : "in-progress"
+                    : "not-started";
+
+                  const progress = participation ? participation.progress : 0;
+
+                  return (
+                    <QuestRow
+                      key={quest._id}
+                      title={quest.title}
+                      reward={quest.rewardPoints}
+                      type={quest.type}
+                      status={status}
+                      progress={progress}
+                      total={quest.requirements?.target || 100}
+                      onJoin={() => handleJoinQuest(quest._id)}
+                      onClaim={() => handleClaimQuest(quest._id)}
+                      isLoading={actionLoading === quest._id}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
 

@@ -17,6 +17,7 @@ import {
 const NAV_ROUTES = [
   { label: "OVERVIEW", path: "/profile" },
   { label: "TOURNAMENT", path: "/profile/tournaments" },
+  { label: "QUESTS", path: "/profile/quests" },
   { label: "TEAMS", path: "/profile/teams" },
   { label: "CARDS", path: "/profile/cards" },
   { label: "COUPONS", path: "/profile/coupons" },
