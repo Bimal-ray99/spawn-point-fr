@@ -19,6 +19,11 @@ import FeaturesSection from "@/components/FeaturesSection";
 import Vr from "@/components/Vr/page";
 import Vrcard from "@/components/HorizontalScroll/HorizontalScroll";
 import { RefreshSection } from "@/components/RefreshSection/RefreshSection";
+import Challenges from "@/components/Challenges";
+import HowToClaim from "@/components/HowToClaim";
+import GameModes from "@/components/GameModes";
+import LoadOut from "@/components/LoadOut";
+import BuiltDifferent from "@/components/BuiltDifferent";
 
 let isInitialLoad = true;
 
@@ -62,10 +67,15 @@ export default function Home() {
       {showPreloader && <PreLoader />}
       <Hero showPreloader={showPreloader} />
       <WhatWeDo />
-      <ChampionSection />
+      {/* <BuiltDifferent /> */}
       <FeaturesSection />
       {/* <Vr />
       <Vrcard /> */}
+      <ChampionSection />
+      <GameModes />
+      <LoadOut />
+      <Challenges />
+      <HowToClaim />
       <RefreshSection />
       {/* <ClientReviewsSection />
       <GalleryCallout />
