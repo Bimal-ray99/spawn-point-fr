@@ -1,8 +1,16 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ScrollingText } from "@/components/ScrollingText/ScrollingText";
+import ShapeDeco from "@/components/ShapeDeco";
+import "./Challenges.css";
 
 const CHALLENGE_TYPES = {
   DAILY: "daily",
@@ -17,18 +25,21 @@ const challengesData = {
       reward: "20 COINS",
       id: 1,
       type: "DAILY",
+      image: "/img.webp",
     },
     {
       title: "LAST OF US ROGUE LIKE WIN",
       reward: "20 COINS",
       id: 2,
       type: "DAILY",
+      image: "/img.webp",
     },
     {
       title: "FC26 - WIN AGAINST LEGENDARY AI",
       reward: "20 COINS",
       id: 3,
       type: "DAILY",
+      image: "/img.webp",
     },
   ],
   weekly: [
@@ -37,18 +48,21 @@ const challengesData = {
       reward: "50 COINS",
       id: 4,
       type: "WEEKLY",
+      image: "/img.webp",
     },
     {
       title: "WIN 5 MATCHES IN FC ONLINE - RANDOM",
       reward: "50 COINS",
       id: 5,
       type: "WEEKLY",
+      image: "/img.webp",
     },
     {
       title: "WIN 5 MATCHES WAR ZONE - RANDOM",
       reward: "50 COINS",
       id: 6,
       type: "WEEKLY",
+      image: "/img.webp",
     },
   ],
   crowned: [
@@ -58,6 +72,7 @@ const challengesData = {
       id: 7,
       featured: true,
       type: "CROWNED",
+      image: "/img.webp",
     },
     {
       title: "SACKBOY CHALLENGE",
@@ -65,6 +80,7 @@ const challengesData = {
       id: 8,
       featured: true,
       type: "CROWNED",
+      image: "/img.webp",
     },
     {
       title: "FORTNITE FESTIVAL - EARN FLAWLESS IN EXPERT",
@@ -72,173 +88,279 @@ const challengesData = {
       id: 9,
       featured: true,
       type: "CROWNED",
+      image: "/img.webp",
     },
   ],
 };
 
 export default function Challenges() {
   const [activeTab, setActiveTab] = useState(CHALLENGE_TYPES.DAILY);
-  const sectionRef = useRef(null);
+  const heroSectionRef = useRef(null);
+  const cardsSectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroSectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax for Mira character
+  const miraY = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-32 overflow-hidden bg-background"
-    >
-      {/* Background Scrolling Text */}
-      <div className="absolute top-20 left-0 w-full opacity-[0.03] pointer-events-none select-none">
+    <>
+      {/* SECTION 1: Hero Section with Scrolling Text and Mira */}
+      <section
+        ref={heroSectionRef}
+        className="relative overflow-hidden bg-primary h-[50vh] flex items-start justify-center"
+      >
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/elements/bgele.svg"
+            alt=""
+            fill
+            className="object-cover opacity-[10%]"
+            aria-hidden="true"
+          />
+        </div>
+        {/* Halftone Pattern Background */}
+        <div className="absolute inset-0 z-[1] halftone-animated opacity-15" />
+
+        {/* Halftone Overlay Image */}
+        <div className="absolute inset-0 z-[2] halftone-overlay opacity-[8%]" />
+
+        {/* Single Big Scrolling Text - Below Image at Bottom */}
         <ScrollingText
-          text="CHALLENGES CHALLENGES"
-          direction="leftToRight"
-          className="font-DurkItalic text-[15vw] leading-none text-black whitespace-nowrap"
-          scrollTrigger={sectionRef}
+          text="Challenges"
+          direction="rightToLeft"
+          className="absolute font-DurkItalic uppercase tracking-wider text-white pointer-events-none leading-none text-[clamp(8rem,28vw,24rem)] bottom-[4rem] left-20 z-[20] drop-shadow-xl"
+          scrollTrigger={heroSectionRef}
+          startX="100%"
+          endX="-20%"
         />
-      </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4 mb-4"
-            >
-              <div className="h-[2px] w-12 bg-primary" />
-              <span className="font-mono text-primary tracking-widest uppercase text-sm font-bold">
-                Compete & Earn
-              </span>
-            </motion.div>
+        {/* Central Mira Character - Bigger (80vh), overflow hidden clips it */}
+        <motion.div
+          style={{ y: miraY }}
+          className="relative z-[30] flex items-start justify-center"
+        >
+          <Image
+            src="/home/mira.png"
+            alt="Mira"
+            width={900}
+            height={1200}
+            className="w-[35vw] h-auto object-contain object-top"
+            priority
+          />
+        </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-6xl md:text-8xl font-DurkItalic uppercase text-base-500 leading-[0.85]"
-            >
-              CHALLENGES
-            </motion.h2>
-          </div>
+        {/* ShapeDeco - bottom right */}
+        <div className="z-50">
+          <ShapeDeco
+            position="bottom-right"
+            primaryColor="bg-background"
+            height={80}
+            width="35%"
+          />
+        </div>
+      </section>
 
-          {/* Custom Tab Navigation */}
-          <div className="flex bg-white p-2 rounded-full border border-base-200 shadow-lg">
-            {[
-              { key: CHALLENGE_TYPES.DAILY, label: "DAILY" },
-              { key: CHALLENGE_TYPES.WEEKLY, label: "WEEKLY" },
-              { key: CHALLENGE_TYPES.CROWNED, label: "CROWNED" },
-            ].map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`
-                  relative px-8 py-3 rounded-full font-bold text-sm tracking-wide transition-all duration-300
-                  ${
-                    activeTab === tab.key
-                      ? "text-white"
-                      : "text-base-400 hover:text-base-500"
-                  }
-                `}
-              >
-                {activeTab === tab.key && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-primary rounded-full shadow-md"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{tab.label}</span>
-              </button>
-            ))}
-          </div>
+      {/* SECTION 2: Cards Section */}
+      <section
+        ref={cardsSectionRef}
+        className="relative py-16 md:py-24 overflow-hidden bg-background"
+      >
+        {/* Background Element - bgele.svg */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/elements/bgele.svg"
+            alt=""
+            fill
+            className="object-cover opacity-[50%]"
+            aria-hidden="true"
+          />
         </div>
 
-        {/* Challenges Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {challengesData[activeTab].map((challenge, index) => (
+        <div className="mask-left-corner absolute bottom-0 right-0 z-10 h-1/2 w-[30%] rotate-180 bg-primary" />
+        <div className="mask-right-corner absolute bottom-0 left-0 z-10 h-1/2 w-[30%] rotate-180 bg-primary" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-[50]">
+          {/* Header Section with Tabs */}
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+            <div>
               <motion.div
-                key={challenge.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative bg-white border border-base-200 p-8 hover:border-primary transition-colors duration-300"
-                style={{
-                  boxShadow: "8px 8px 0px 0px rgba(0,0,0,0.05)",
-                }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-4 mb-4"
               >
-                {/* Hover Effect - Hard Shadow Move */}
-                <div className="absolute inset-0 bg-white transition-transform duration-300 group-hover:-translate-y-2 group-hover:-translate-x-2 border border-transparent group-hover:border-primary z-0" />
-
-                <div className="relative z-10">
-                  {/* Top Meta */}
-                  <div className="flex justify-between items-start mb-8">
-                    <span className="font-mono text-xs text-base-300 uppercase tracking-wider">
-                      {String(index + 1).padStart(2, "0")} — {challenge.type}
-                    </span>
-                    {challenge.featured && (
-                      <span className="bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
-                        Featured
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl font-black uppercase leading-tight text-base-500 mb-12 min-h-[4rem] group-hover:text-primary transition-colors">
-                    {challenge.title}
-                  </h3>
-
-                  {/* Bottom Action */}
-                  <div className="flex items-end justify-between border-t border-base-200 pt-6 group-hover:border-primary/20 transition-colors">
-                    <div>
-                      <p className="font-mono text-[10px] text-base-350 uppercase tracking-wider mb-1">
-                        Reward
-                      </p>
-                      <p className="text-xl font-black text-primary">
-                        {challenge.reward}
-                      </p>
-                    </div>
-
-                    <div className="w-10 h-10 bg-base-100 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1.16699 7.00033H12.8337M12.8337 7.00033L7.00033 1.16699M12.8337 7.00033L7.00033 12.8337"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                <div className="h-[2px] w-12 bg-primary" />
+                <span className="font-mono text-primary tracking-widest uppercase text-sm font-bold">
+                  Compete & Earn
+                </span>
               </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+            </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-20 flex justify-center">
-          <button className="group relative px-10 py-4 bg-base-500 text-white font-bold uppercase tracking-wider hover:bg-primary transition-colors duration-300 overflow-hidden">
-            <span className="relative z-10">View All Challenges</span>
-            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </button>
+            {/* Parallelogram Tab Navigation */}
+            <div className="flex bg-white/10 backdrop-blur-sm p-1 gap-2 border border-base-200/20">
+              {[
+                { key: CHALLENGE_TYPES.DAILY, label: "DAILY" },
+                { key: CHALLENGE_TYPES.WEEKLY, label: "WEEKLY" },
+                { key: CHALLENGE_TYPES.CROWNED, label: "CROWNED" },
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className="relative px-8 py-3 font-bold text-sm tracking-wide transition-all duration-300 parallelogram-tab"
+                  style={{
+                    clipPath:
+                      "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                  }}
+                >
+                  {activeTab === tab.key && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-primary"
+                      style={{
+                        clipPath:
+                          "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                      }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                  )}
+                  <span
+                    className={`relative z-10 ${
+                      activeTab === tab.key
+                        ? "text-white"
+                        : "text-base-400 hover:text-base-500"
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Horizontal Cards - Vertically Stacked */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col gap-6 max-w-5xl mx-auto"
+            >
+              {challengesData[activeTab].map((challenge, index) => (
+                <motion.div
+                  key={challenge.id}
+                  initial={{ opacity: 0, x: -100 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{
+                    delay: index * 0.15,
+                    duration: 0.6,
+                    ease: "easeOut",
+                  }}
+                  className="group relative w-full"
+                >
+                  {/* Hard shadow */}
+                  <div
+                    className="absolute inset-0 bg-primary group-hover:bg-secondary translate-y-3 translate-x-3 transition-all duration-300"
+                    style={{
+                      WebkitMaskImage: "url('/mask-1920.svg')",
+                      WebkitMaskSize: "cover",
+                      maskImage: "url('/mask-1920.svg')",
+                      maskSize: "cover",
+                    }}
+                  />
+
+                  <div className="absolute inset-0 z-[1] halftone-animated opacity-35" />
+
+                  {/* Main card - masked with stroke and gradient */}
+                  <div
+                    className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 border-2 border-gray-200/50 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1 group-hover:border-primary/30 group-hover:shadow-lg"
+                    style={{
+                      WebkitMaskImage: "url('/mask-1920.svg')",
+                      WebkitMaskSize: "cover",
+                      maskImage: "url('/mask-1920.svg')",
+                      maskSize: "cover",
+                    }}
+                  >
+                    {/* Game Image on Left - Full height */}
+                    <div className="absolute left-0 top-0 bottom-0 w-28 md:w-36 flex items-center justify-center overflow-hidden">
+                      <Image
+                        src={challenge.image}
+                        alt={challenge.title}
+                        width={150}
+                        height={150}
+                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 mix-blend-multiply" />
+
+                    {/* Content - Horizontal layout */}
+                    <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between w-full pl-32 md:pl-40">
+                      <div className="flex-1 mb-4 md:mb-0">
+                        <span className="font-mono text-xs text-base-300 uppercase tracking-wider block mb-2">
+                          {String(index + 1).padStart(2, "0")} —{" "}
+                          {challenge.type}
+                        </span>
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-black uppercase leading-tight text-base-500 group-hover:text-primary transition-colors">
+                          {challenge.title}
+                        </h3>
+                      </div>
+
+                      {/* Reward + Arrow */}
+                      <div className="flex items-center gap-4 md:gap-6">
+                        <div className="text-left md:text-right">
+                          <p className="font-mono text-[10px] text-base-350 uppercase tracking-wider mb-1">
+                            Reward
+                          </p>
+                          <p className="text-xl md:text-2xl font-black text-primary">
+                            {challenge.reward}
+                          </p>
+                        </div>
+
+                        <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                          >
+                            <path
+                              d="M1.167 7h11.666M12.833 7L7 1.167M12.833 7L7 12.833"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Bottom CTA */}
+          <div className="mt-20 mb-12 flex justify-center">
+            <button className="group relative px-10 py-4 bg-base-500 text-white font-bold uppercase tracking-wider hover:bg-primary transition-colors duration-300 overflow-hidden">
+              <span className="relative z-10">View All Challenges</span>
+              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

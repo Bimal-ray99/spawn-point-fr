@@ -14,9 +14,10 @@
 
 /* Stroke text for 3D "CHALLENGES" */
 .stroke-text-primary {
-  -webkit-text-stroke: 3px rgba(0, 87, 255, 0.5);
+  -webkit-text-stroke: 4px rgba(0, 87, 255, 0.8);
   color: transparent;
   user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 87, 255, 0.3));
 }
 
 /* Halftone pattern animation */

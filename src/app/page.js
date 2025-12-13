@@ -70,7 +70,7 @@ export default function Home() {
       <WhatWeDo />
       <Tournament />
       {/* <BuiltDifferent /> */}
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <Vr />
       <Vrcard />
       <ChampionSection />

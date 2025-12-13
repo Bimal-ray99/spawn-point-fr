@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollingText } from "@/components/ScrollingText/ScrollingText";
+import ShapeDeco from "@/components/ShapeDeco";
 
 const steps = [
   {
@@ -112,20 +114,32 @@ export default function HowToClaim() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 overflow-hidden bg-background"
+      className="relative py-32 overflow-hidden bg-primary"
     >
       {/* Background Scrolling Text */}
-      <div className="absolute inset-0 flex flex-col justify-center opacity-[0.04] pointer-events-none select-none z-0">
+      <div className="absolute inset-0 flex flex-col justify-center opacity-[0.08] pointer-events-none select-none z-0">
         <motion.div style={{ x: x1 }} className="whitespace-nowrap">
-          <span className="font-DurkItalic text-[20vw] leading-none text-black">
+          <span className="font-DurkItalic text-[20vw] leading-none text-white">
             HOW TO CLAIM HOW TO CLAIM
           </span>
         </motion.div>
         <motion.div style={{ x: x2 }} className="whitespace-nowrap">
-          <span className="font-DurkItalic text-[20vw] leading-none text-primary">
+          <span className="font-DurkItalic text-[20vw] leading-none text-white">
             REWARDS REWARDS REWARDS
           </span>
         </motion.div>
+      </div>
+
+      {/* Mira Image - Left Side with Low Z-Index */}
+      <div className="absolute left-0 top-0 z-[1] pointer-events-none">
+        <Image
+          src="/home/mira.png"
+          alt="Mira"
+          width={900}
+          height={1200}
+          className="w-[35vw] h-auto object-contain object-top"
+          priority
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -136,14 +150,14 @@ export default function HowToClaim() {
           className="text-center mb-24"
         >
           <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="h-[2px] w-12 bg-primary" />
-            <span className="font-mono text-primary tracking-widest uppercase text-sm font-bold">
+            <div className="h-[2px] w-12 bg-white" />
+            <span className="font-mono text-white tracking-widest uppercase text-sm font-bold">
               Process
             </span>
-            <div className="h-[2px] w-12 bg-primary" />
+            <div className="h-[2px] w-12 bg-white" />
           </div>
 
-          <h2 className="text-6xl md:text-8xl font-DurkItalic uppercase text-base-500 leading-[0.85]">
+          <h2 className="text-6xl md:text-8xl font-DurkItalic uppercase text-white leading-[0.85]">
             HOW TO CLAIM
           </h2>
         </motion.div>
@@ -166,13 +180,21 @@ export default function HowToClaim() {
                 <div className="text-primary group-hover:scale-110 transition-transform duration-300">
                   {step.icon}
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-mono text-xs font-bold">
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-mono text-xs font-bold">
                   {step.id}
                 </div>
               </div>
 
               {/* Content */}
-              <div className="text-center bg-white p-8 border border-base-200 hover:border-primary transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)]">
+              <div
+                className="text-center bg-white p-8 border border-base-200 hover:border-primary transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] min-h-[160px] flex flex-col justify-center"
+                style={{
+                  WebkitMaskImage: "url('/mask-1920.svg')",
+                  WebkitMaskSize: "cover",
+                  maskImage: "url('/mask-1920.svg')",
+                  maskSize: "cover",
+                }}
+              >
                 <h3 className="text-2xl font-black uppercase leading-tight text-base-500 mb-4 group-hover:text-primary transition-colors">
                   {step.title}
                 </h3>
@@ -183,6 +205,16 @@ export default function HowToClaim() {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      {/* ShapeDeco - Bottom Right */}
+      <div className="z-[20]">
+        <ShapeDeco
+          position="bottom-right"
+          primaryColor="bg-background"
+          height={80}
+          width="30%"
+        />
       </div>
     </section>
   );
