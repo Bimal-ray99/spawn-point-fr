@@ -73,8 +73,8 @@ export default function Home() {
       {/* <FeaturesSection /> */}
       <Vr />
       <Vrcard />
-      <ChampionSection />
       <GameModes />
+      <ChampionSection />
       <LoadOut />
       <Challenges />
       <HowToClaim />

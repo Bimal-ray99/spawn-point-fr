@@ -176,18 +176,29 @@ export default function HowToClaim() {
               className="relative group"
             >
               {/* Step Number/Icon Circle */}
-              <div className="w-24 h-24 mx-auto bg-white border-2 border-base-200 rounded-full flex items-center justify-center mb-8 group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <div className="text-primary group-hover:scale-110 transition-transform duration-300">
+              <div className="w-24 h-24 mx-auto bg-white border-2 border-white rounded-full flex items-center justify-center mb-8 group-hover:border-black group-hover:scale-110 transition-all duration-300 shadow-lg relative z-20">
+                <div className="text-primary group-hover:text-black transition-colors duration-300">
                   {step.icon}
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-mono text-xs font-bold">
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-mono text-xs font-bold">
                   {step.id}
                 </div>
               </div>
 
-              {/* Content */}
+              {/* Hard Shadow - Moves on hover */}
               <div
-                className="text-center bg-white p-8 border border-base-200 hover:border-primary transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] min-h-[160px] flex flex-col justify-center"
+                className="absolute left-0 right-0 bottom-0 top-[120px] bg-black translate-y-3 translate-x-3 transition-all duration-300 group-hover:translate-y-4 group-hover:translate-x-4 group-hover:bg-black"
+                style={{
+                  WebkitMaskImage: "url('/mask-1920.svg')",
+                  WebkitMaskSize: "cover",
+                  maskImage: "url('/mask-1920.svg')",
+                  maskSize: "cover",
+                }}
+              />
+
+              {/* Content Card */}
+              <div
+                className="relative text-center bg-white p-8 border-2 border-transparent min-h-[160px] flex flex-col justify-center transition-all duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1 group-hover:border-black"
                 style={{
                   WebkitMaskImage: "url('/mask-1920.svg')",
                   WebkitMaskSize: "cover",
@@ -195,10 +206,13 @@ export default function HowToClaim() {
                   maskSize: "cover",
                 }}
               >
-                <h3 className="text-2xl font-black uppercase leading-tight text-base-500 mb-4 group-hover:text-primary transition-colors">
+                {/* Halftone on Card */}
+                <div className="absolute inset-0 z-[1] halftone-animated opacity-10 pointer-events-none" />
+
+                <h3 className="text-2xl font-black uppercase leading-tight text-base-500 mb-4 group-hover:text-primary transition-colors relative z-10">
                   {step.title}
                 </h3>
-                <p className="font-mono text-sm text-base-350 uppercase tracking-wide">
+                <p className="font-mono text-sm text-base-350 uppercase tracking-wide relative z-10">
                   {step.description}
                 </p>
               </div>

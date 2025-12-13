@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 const packs = [
   {
@@ -27,16 +28,49 @@ export default function LoadOut() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 overflow-hidden bg-[#4361EE]"
+      className="relative py-32 overflow-hidden bg-background"
     >
+      {/* Background Image - Low opacity */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/elements/bg-1.png"
+          alt=""
+          fill
+          className="object-cover opacity-20"
+          aria-hidden="true"
+        />
+      </div>
+
       {/* Halftone Pattern Background */}
+      <div className="absolute inset-0 z-[1] halftone-animated opacity-25" />
+
+      <div className="absolute left-0 top-0 z-[1] pointer-events-none">
+        <Image
+          src="/home/mira.png"
+          alt="Mira"
+          width={900}
+          height={1200}
+          className="w-[35vw] h-auto object-contain object-top"
+          priority
+        />
+      </div>
+
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
+        className="absolute inset-0 z-10 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
+          WebkitMaskImage: "url('/elements/center.svg')",
+          WebkitMaskSize: "cover",
+          WebkitMaskPosition: "center",
+          maskImage: "url('/elements/center.svg')",
+          maskSize: "cover",
+          maskPosition: "center",
         }}
-      />
+      >
+        {/* Background Image */}
+        <Image src="/img.webp" alt="" fill className="object-cover" />
+        {/* Primary Color Overlay */}
+        <div className="absolute inset-0 bg-primary/90" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
@@ -45,7 +79,7 @@ export default function LoadOut() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-6xl md:text-8xl font-DurkItalic uppercase text-white leading-[0.85] mb-6 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.2)]"
+            className="text-6xl md:text-8xl font-DurkItalic uppercase text-white leading-[0.85] mb-6 "
           >
             CHOOSE YOUR
             <br />
@@ -76,11 +110,30 @@ export default function LoadOut() {
               transition={{ delay: index * 0.1 }}
               className="relative group"
             >
-              {/* Hard Shadow */}
-              <div className="absolute inset-0 bg-black translate-y-3 translate-x-3 transition-transform duration-200 group-hover:translate-y-4 group-hover:translate-x-4" />
+              {/* Hard Shadow - Primary to Secondary on hover */}
+              <div
+                className="absolute inset-0 bg-black translate-y-3 translate-x-3 transition-all duration-300 group-hover:translate-y-4 group-hover:translate-x-4 group-hover:bg-black"
+                style={{
+                  WebkitMaskImage: "url('/mask-1920.svg')",
+                  WebkitMaskSize: "cover",
+                  maskImage: "url('/mask-1920.svg')",
+                  maskSize: "cover",
+                }}
+              />
 
               {/* Card Content */}
-              <div className="relative bg-white border-2 border-black h-full flex flex-col transition-transform duration-200 group-hover:-translate-y-1 group-hover:-translate-x-1">
+              <div
+                className="relative bg-white h-full flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1 border-2 border-transparent"
+                style={{
+                  WebkitMaskImage: "url('/mask-1920.svg')",
+                  WebkitMaskSize: "cover",
+                  maskImage: "url('/mask-1920.svg')",
+                  maskSize: "cover",
+                }}
+              >
+                {/* Halftone on Card */}
+                <div className="absolute inset-0 z-[1] halftone-animated opacity-10 pointer-events-none" />
+
                 {/* Popular Badge */}
                 {pack.popular && (
                   <div className="absolute top-0 right-0 bg-black text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider z-20">
@@ -88,22 +141,32 @@ export default function LoadOut() {
                   </div>
                 )}
 
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <Image
+                    src="/elements/bg-1.png"
+                    alt=""
+                    fill
+                    className="object-cover opacity-10"
+                    aria-hidden="true"
+                  />
+                </div>
+
                 {/* Top Section */}
-                <div className="p-12 text-center flex-1 flex flex-col justify-center items-center">
-                  <h3 className="text-6xl font-black text-[#4361EE] mb-2">
+                <div className="p-12 text-center flex-1 flex flex-col justify-center items-center relative z-10">
+                  <h3 className="text-6xl font-black text-black mb-2 group-hover:text-secondary transition-colors">
                     {pack.coins}
                   </h3>
-                  <span className="font-mono text-xs text-black uppercase tracking-[0.2em] font-bold">
+                  <span className="font-mono text-xs text-base-400 uppercase tracking-[0.2em] font-bold">
                     Coins
                   </span>
                 </div>
 
                 {/* Divider */}
-                <div className="h-0.5 w-full bg-black" />
+                <div className="h-0.5 w-full bg-base-200 group-hover:bg-secondary transition-colors" />
 
                 {/* Bottom Section */}
-                <div className="p-6 text-center bg-gray-50 group-hover:bg-gray-100 transition-colors">
-                  <span className="text-4xl font-black text-black/80">
+                <div className="p-6 text-center bg-gray-50 transition-colors relative z-10">
+                  <span className="text-4xl font-black text-base-500 group-hover:text-secondary transition-colors">
                     {pack.price}
                   </span>
                 </div>

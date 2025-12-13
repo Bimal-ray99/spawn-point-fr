@@ -26,14 +26,6 @@ export function GlobalBackground() {
       {/* Character Image */}
       {!hideCharacter && (
         <div className="absolute -right-20 bottom-0 h-[90vh] w-auto select-none opacity-100">
-          <Image
-            src="/home/mira.png"
-            alt="Character"
-            width={800}
-            height={1000}
-            className="h-full w-auto object-contain"
-            priority
-          />
         </div>
       )}
     </div>
