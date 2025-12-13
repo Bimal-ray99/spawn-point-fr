@@ -33,7 +33,7 @@ export const sampleTournaments = [
     id: 3,
     enquiryId: "T-003",
     slug: "duo-challenge",
-    title: "Duo Challenge",
+    title: "XMAS CASH CUP",
     prize: "$2,500",
     date: "March 26-30, 2025",
     status: "current",
@@ -41,9 +41,9 @@ export const sampleTournaments = [
     featured: true,
     platforms: ["All"],
     imageSrc: "/img.webp",
-    genre: "Duo Combat",
+    genre: "25k Cash Prize",
     description:
-      "Partner up with a friend and take on other duos in this intense combat challenge.",
+      "Mortal Kombat | Gran Truismo7 ",
   },
   {
     id: 4,

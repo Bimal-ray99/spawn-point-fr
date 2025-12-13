@@ -221,7 +221,7 @@ const ScrollReveal = () => {
       {/* Hero Section */}
       <section
         data-hero
-        className="relative w-screen h-screen bg-[#111117] text-center overflow-hidden"
+        className="relative w-screen h-screen bg-black text-center overflow-hidden"
       >
         {/* Hero Image Container */}
         <div
@@ -236,7 +236,7 @@ const ScrollReveal = () => {
           />
 
           {/* Logo */}
-          <div
+          {/* <div
             data-hero-logo
             className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[60vw] h-auto will-change-[opacity]"
           >
@@ -245,7 +245,7 @@ const ScrollReveal = () => {
               alt=""
               className="w-full h-auto object-contain"
             />
-          </div>
+          </div> */}
 
           {/* Foreground Image Layer */}
           <img
@@ -304,7 +304,7 @@ const ScrollReveal = () => {
             data-overlay-copy
             className="uppercase text-4xl md:text-6xl lg:text-8xl xl:text-[6rem] font-DurkBold tracking-tight md:tracking-tighter lg:tracking-[-0.2rem] leading-[0.8] bg-clip-text [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] text-transparent origin-top opacity-0"
           >
-            Experience the Future
+            EXPERIENCE THE FUTURE OF GAMING WITH NEXT-GEN VR
           </h1>
         </div>
       </section>

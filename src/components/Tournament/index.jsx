@@ -70,7 +70,7 @@ export const Tournament = ({ tournaments = sampleTournaments }) => {
         <div className="flex justify-center mt-6 sm:mt-8">
           <AnimatedButton
             route="/tournament"
-            label="View All Tournaments"
+            label="View All"
             animate={false}
           />
         </div>

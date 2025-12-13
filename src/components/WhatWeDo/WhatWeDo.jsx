@@ -58,9 +58,8 @@ export default function WhatWeDo() {
 
             <Copy delay={0.3}>
               <p className="what-we-do-description">
-                Dominate the battlefield, outplay your rivals, and claim your
-                legacy.{" "}
-                <span className="what-we-do-highlight">The Arena awaits!</span>
+                REGISTER FOR UPCOMING{" "}
+                <span className="what-we-do-highlight">EVENTS</span>
               </p>
             </Copy>
           </div>

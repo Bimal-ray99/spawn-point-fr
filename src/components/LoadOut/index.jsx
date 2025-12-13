@@ -54,6 +54,16 @@ export default function LoadOut() {
           priority
         />
       </div>
+      <div className="absolute right-0 bottom-0 z-[1] pointer-events-none">
+        <Image
+          src="/coin.png"
+          alt="Mira"
+          width={900}
+          height={900}
+          className="w-[15vw] h-auto object-contain object-top"
+          priority
+        />
+      </div>
 
       <div
         className="absolute inset-0 z-10 pointer-events-none"

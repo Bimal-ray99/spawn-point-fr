@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { ScrollingText } from "@/components/ScrollingText/ScrollingText";
 import ShapeDeco from "@/components/ShapeDeco";
+import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 import "./Challenges.css";
 
 const CHALLENGE_TYPES = {
@@ -201,7 +202,12 @@ export default function Challenges() {
             </div>
 
             {/* Parallelogram Tab Navigation */}
-            <div className="flex bg-white/10 backdrop-blur-sm p-1 gap-2 border border-base-200/20">
+            <div
+              className="flex bg-white/10 backdrop-blur-sm p-1.5 gap-0 border border-base-200/20 rounded-xl"
+              style={{
+                transform: "skewX(-8deg)",
+              }}
+            >
               {[
                 { key: CHALLENGE_TYPES.DAILY, label: "DAILY" },
                 { key: CHALLENGE_TYPES.WEEKLY, label: "WEEKLY" },
@@ -210,20 +216,12 @@ export default function Challenges() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className="relative px-8 py-3 font-bold text-sm tracking-wide transition-all duration-300 parallelogram-tab"
-                  style={{
-                    clipPath:
-                      "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
-                  }}
+                  className="relative px-8 py-3 font-bold text-sm tracking-wide transition-all duration-300 rounded-lg"
                 >
                   {activeTab === tab.key && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-primary"
-                      style={{
-                        clipPath:
-                          "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
-                      }}
+                      className="absolute inset-0 bg-primary rounded-lg"
                       transition={{
                         type: "spring",
                         bounce: 0.2,
@@ -237,6 +235,10 @@ export default function Challenges() {
                         ? "text-white"
                         : "text-base-400 hover:text-base-500"
                     }`}
+                    style={{
+                      transform: "skewX(8deg)",
+                      display: "inline-block",
+                    }}
                   >
                     {tab.label}
                   </span>
@@ -354,10 +356,7 @@ export default function Challenges() {
 
           {/* Bottom CTA */}
           <div className="mt-20 mb-12 flex justify-center">
-            <button className="group relative px-10 py-4 bg-base-500 text-white font-bold uppercase tracking-wider hover:bg-primary transition-colors duration-300 overflow-hidden">
-              <span className="relative z-10">View All Challenges</span>
-              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
+            <AnimatedButton label="View All" route="/challenges" />
           </div>
         </div>
       </section>
