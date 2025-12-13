@@ -24,6 +24,7 @@ import HowToClaim from "@/components/HowToClaim";
 import GameModes from "@/components/GameModes";
 import LoadOut from "@/components/LoadOut";
 import BuiltDifferent from "@/components/BuiltDifferent";
+import Tournament from "@/components/Tournament";
 
 let isInitialLoad = true;
 
@@ -67,6 +68,7 @@ export default function Home() {
       {showPreloader && <PreLoader />}
       <Hero showPreloader={showPreloader} />
       <WhatWeDo />
+      <Tournament />
       {/* <BuiltDifferent /> */}
       <FeaturesSection />
       <Vr />
