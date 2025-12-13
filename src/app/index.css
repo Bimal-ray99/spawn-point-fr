@@ -52,7 +52,7 @@
 
 .hero .hero-content {
   position: absolute;
-  top: 38vh;
+  top: 10vh;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -127,8 +127,8 @@
   }
 
   .hero .hero-header h1 {
-  font-size: 10rem;
-}
+    font-size: 10rem;
+  }
 
   .hero .hero-content {
     width: 100%;
@@ -154,7 +154,7 @@
 .what-we-do {
   width: 100vw;
   height: max-content;
-  @apply bg-background
+  @apply bg-background;
 }
 
 .what-we-do .container h1 {

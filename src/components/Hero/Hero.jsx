@@ -58,7 +58,17 @@ export default function Hero({ showPreloader }) {
         <div className="hero-content">
           <div className="hero-header">
             <Copy animateOnScroll={false} delay={showPreloader ? 8 : 0.85}>
-              <h1>Spawn Point</h1>
+              <div className="w-full flex top-12">
+                <Image
+                  src="/logo.png"
+                  alt="Spawn Point"
+                  width={800}
+                  height={200}
+                  priority
+                  className="w-auto h-auto max-w-full object-contain"
+                  style={{ maxHeight: "50rem" }}
+                />
+              </div>
             </Copy>
           </div>
         </div>

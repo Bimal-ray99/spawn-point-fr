@@ -69,8 +69,8 @@ export default function Home() {
       <WhatWeDo />
       {/* <BuiltDifferent /> */}
       <FeaturesSection />
-      {/* <Vr />
-      <Vrcard /> */}
+      <Vr />
+      <Vrcard />
       <ChampionSection />
       <GameModes />
       <LoadOut />
