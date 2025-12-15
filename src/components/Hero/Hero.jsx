@@ -57,7 +57,7 @@ export default function Hero({ showPreloader }) {
       <div className="container">
         <div className="hero-content">
           <div className="hero-header">
-            <Copy animateOnScroll={false} delay={showPreloader ? 8 : 0.85}>
+            <Copy animateOnScroll={false} delay={showPreloader ? 4 : 0.85}>
               <div className="w-full flex top-12">
                 <Image
                   src="/logo.png"

@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { logoData } from "./logoData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,42 +49,6 @@ const ScrollReveal = () => {
 
     const initialOverlayScale = 500;
     const logoContainer = document.querySelector("[data-logo-container]");
-    const logoMask = document.getElementById("logoMask");
-
-    if (!logoMask) return;
-
-    logoMask.setAttribute("d", logoData);
-
-    // Update logo mask to fit container
-    function updateLogoMask() {
-      if (!logoContainer || !logoMask) return;
-
-      const logoDimensions = logoContainer.getBoundingClientRect();
-      const logoBoundingBox = logoMask.getBBox();
-
-      const horizontalScaleRatio = logoDimensions.width / logoBoundingBox.width;
-      const verticalScaleRatio = logoDimensions.height / logoBoundingBox.height;
-      const logoScaleFactor = Math.min(
-        horizontalScaleRatio,
-        verticalScaleRatio
-      );
-
-      const logoHorizontalPosition =
-        logoDimensions.left +
-        (logoDimensions.width - logoBoundingBox.width * logoScaleFactor) / 2 -
-        logoBoundingBox.x * logoScaleFactor;
-      const logoVerticalPosition =
-        logoDimensions.top +
-        (logoDimensions.height - logoBoundingBox.height * logoScaleFactor) / 2 -
-        logoBoundingBox.y * logoScaleFactor;
-
-      logoMask.setAttribute(
-        "transform",
-        `translate(${logoHorizontalPosition}, ${logoVerticalPosition}) scale(${logoScaleFactor})`
-      );
-    }
-
-    updateLogoMask();
 
     // Set initial SVG overlay state
     gsap.set(svgOverlay, {
@@ -116,13 +79,27 @@ const ScrollReveal = () => {
           // Phase 1: Fade out logo and copy text (0% - 15%)
           if (scrollProgress <= 0.15) {
             const fadeOpacity = 1 - scrollProgress * (1 / 0.15);
-            gsap.set([heroImgLogo, heroImgCopy], {
-              opacity: fadeOpacity,
-            });
+            if (heroImgLogo) {
+              gsap.set(heroImgLogo, {
+                opacity: fadeOpacity,
+              });
+            }
+            if (heroImgCopy) {
+              gsap.set(heroImgCopy, {
+                opacity: fadeOpacity,
+              });
+            }
           } else {
-            gsap.set([heroImgLogo, heroImgCopy], {
-              opacity: 0,
-            });
+            if (heroImgLogo) {
+              gsap.set(heroImgLogo, {
+                opacity: 0,
+              });
+            }
+            if (heroImgCopy) {
+              gsap.set(heroImgCopy, {
+                opacity: 0,
+              });
+            }
           }
 
           // Phase 2: Scale hero image and shrink overlay (0% - 85%)
@@ -192,7 +169,6 @@ const ScrollReveal = () => {
 
     // Handle window resize
     const handleResize = () => {
-      updateLogoMask();
       ScrollTrigger.refresh();
       setupScrollTrigger();
     };
@@ -235,18 +211,6 @@ const ScrollReveal = () => {
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
 
-          {/* Logo */}
-          {/* <div
-            data-hero-logo
-            className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[60vw] h-auto will-change-[opacity]"
-          >
-            <img
-              src="/home/tru.png"
-              alt=""
-              className="w-full h-auto object-contain"
-            />
-          </div> */}
-
           {/* Foreground Image Layer */}
           <img
             src="/home/hero-img-layer-2.png"
@@ -271,31 +235,66 @@ const ScrollReveal = () => {
           className="absolute top-0 left-0 w-full h-full bg-white opacity-0 will-change-[opacity]"
         ></div>
 
-        {/* SVG Mask Overlay */}
+        {/* SVG Text Mask Overlay - Only heading moves */}
         <div
           data-overlay
           className="fixed top-0 left-0 w-screen h-[150vh] z-[1] origin-center"
         >
           <svg width="100%" height="100%">
             <defs>
-              <mask id="logoRevealMask">
+              <mask id="textRevealMask">
                 <rect width="100%" height="100%" fill="white" />
-                <path id="logoMask"></path>
+                {/* Text cutout - reveals image through the text */}
+                <text
+                  id="maskText1"
+                  x="50%"
+                  y="30%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="black"
+                  fontSize="clamp(3rem, 10vw, 10rem)"
+                  fontFamily="DurkBold, sans-serif"
+                  fontWeight="bold"
+                  letterSpacing="-0.02em"
+                >
+                  EXPERIENCE
+                </text>
+                <text
+                  id="maskText2"
+                  x="50%"
+                  y="42%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="black"
+                  fontSize="clamp(3rem, 10vw, 10rem)"
+                  fontFamily="DurkBold, sans-serif"
+                  fontWeight="bold"
+                  letterSpacing="-0.02em"
+                >
+                  THE FUTURE
+                </text>
               </mask>
             </defs>
             <rect
               width="100%"
               height="100%"
               fill="#111117"
-              mask="url(#logoRevealMask)"
+              mask="url(#textRevealMask)"
             />
           </svg>
         </div>
 
-        {/* Logo Container (invisible, used for mask positioning) */}
+        {/* Static Red Paragraph - Does NOT move with mask */}
+        <div className="fixed top-[55%] left-1/2 -translate-x-1/2 z-[3] text-center px-4">
+          <p className="text-secondary text-lg md:text-xl lg:text-2xl font-NeueMontreal max-w-2xl mx-auto">
+            Immerse yourself in next-gen VR gaming
+          </p>
+        </div>
+
+        {/* Logo Container (for mask positioning reference) */}
         <div
           data-logo-container
-          className="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center w-[400px] h-[400px] z-[2]"
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 origin-center w-[80vw] h-[60vh] z-[2] pointer-events-none"
         ></div>
 
         {/* Overlay Copy Text */}

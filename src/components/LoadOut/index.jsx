@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 
 const packs = [
   {
@@ -206,12 +207,7 @@ export default function LoadOut() {
                 Complete challenges to earn free coins everyday
               </p>
 
-              <button className="group relative inline-block">
-                <div className="absolute inset-0 bg-black translate-y-2 translate-x-2 transition-transform duration-200 group-hover:translate-y-3 group-hover:translate-x-3" />
-                <div className="relative bg-[#4361EE] border-2 border-black px-12 py-4 text-white font-black uppercase tracking-wider hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200">
-                  Start Mining
-                </div>
-              </button>
+              <AnimatedButton label="Start Mining" />
             </div>
           </div>
         </motion.div>
