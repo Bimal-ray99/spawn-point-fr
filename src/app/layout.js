@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
             <GlobalNav />
             {children}
           </div>
+          <ConditionalFooter />
         </ClientLayout>
-        <ConditionalFooter />
       </body>
     </html>
   );
