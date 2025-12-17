@@ -16,7 +16,7 @@ import GalleryCallout from "@/components/GalleryCallout/GalleryCallout";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import Nav from "@/components/Nav/Nav";
 import FeaturesSection from "@/components/FeaturesSection";
-import Vr from "@/components/Vr/page";
+import ParallaxSection from "@/components/ParallaxSection/ParallaxSection";
 import Vrcard from "@/components/HorizontalScroll/HorizontalScroll";
 import { RefreshSection } from "@/components/RefreshSection/RefreshSection";
 import Challenges from "@/components/Challenges";
@@ -71,7 +71,7 @@ export default function Home() {
       <Tournament />
       {/* <BuiltDifferent /> */}
       {/* <FeaturesSection /> */}
-      <Vr />
+      <ParallaxSection />
       <Vrcard />
       <GameModes />
       <ChampionSection />

@@ -45,8 +45,8 @@ export default function WhatWeDo() {
           <div className="what-we-do-text-content">
             <div className="what-we-do-heading-wrapper">
               <Copy delay={0.1}>
-                <h2 className="what-we-do-small-heading ">
-                  SIGN UP SPAWN COMPETE!
+                <h2 className="what-we-do-small-heading font-DurkItalic font-bold leading-4 uppercase tracking-normal">
+                  SIGN UP <n /> SPAWN <n /> COMPETE!
                 </h2>
               </Copy>
 

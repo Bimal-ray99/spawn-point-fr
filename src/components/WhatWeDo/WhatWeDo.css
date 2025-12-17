@@ -81,7 +81,6 @@
   line-height: 1;
   display: inline-block;
   margin-right: 1.5rem;
-  @apply font-DurkBoldItalic;
   @apply text-primary;
 }
 

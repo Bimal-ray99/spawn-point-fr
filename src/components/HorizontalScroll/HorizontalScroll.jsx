@@ -110,7 +110,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 flex items-center justify-center z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 {card.decorativeImages.map((src, index) => (
@@ -146,7 +147,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 {/* First diagonal image - top left to bottom right */}
@@ -196,7 +198,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 overflow-hidden z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 <div className="w-full h-full p-4 font-mono text-xs leading-relaxed">
@@ -238,7 +241,8 @@ export default function HorizontalScroll() {
                       <div
                         className={clsx(
                           "par-sm white text-white text-base md:text-lg transition-all duration-700",
-                          hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                          "opacity-100", // Always visible on mobile
+                          hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                         )}
                         style={{
                           transform:
