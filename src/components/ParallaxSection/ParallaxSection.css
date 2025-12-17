@@ -1,0 +1,176 @@
+/* ------- Osmo Parallax Section [Exact Replica] ------- */
+
+.parallax__fade {
+  --color-dark-rgb: 0, 0, 0;
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-dark-rgb), 1) 0%,
+    rgba(var(--color-dark-rgb), 0.738) 19%,
+    rgba(var(--color-dark-rgb), 0.541) 34%,
+    rgba(var(--color-dark-rgb), 0.382) 47%,
+    rgba(var(--color-dark-rgb), 0.278) 56.5%,
+    rgba(var(--color-dark-rgb), 0.194) 65%,
+    rgba(var(--color-dark-rgb), 0.126) 73%,
+    rgba(var(--color-dark-rgb), 0.075) 80.2%,
+    rgba(var(--color-dark-rgb), 0.042) 86.1%,
+    rgba(var(--color-dark-rgb), 0.021) 91%,
+    rgba(var(--color-dark-rgb), 0.008) 95.2%,
+    rgba(var(--color-dark-rgb), 0.002) 98.2%,
+    transparent 100%
+  );
+}
+
+
+.parallax__header {
+  z-index: 2;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  display: flex;
+  position: relative;
+}
+
+.parallax {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.parallax__content {
+  padding: 4rem 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  display: flex;
+  position: relative;
+  background-color: #000;
+}
+
+.cover {
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parallax__visuals {
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 120%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parallax__placeholder {
+  z-index: 0;
+  opacity: 0;
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parallax__layers {
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.cover-copy {
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parallax__fade {
+  z-index: 30;
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 20%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.parallax__black-line-overflow {
+  z-index: 20;
+  background-color: #000;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+}
+
+.parallax__title {
+  pointer-events: auto;
+  position: relative;
+}
+
+.parallax__radial-gradient {
+  z-index: 10;
+  background-image: radial-gradient(
+    circle farthest-corner at 50% 50%,
+    transparent,
+    #000
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  position: fixed;
+  inset: 0;
+}
+
+.parallax__layer-title {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parallax__layer-img {
+  pointer-events: none;
+  object-fit: cover;
+  width: 100%;
+  max-width: none;
+  height: 117.5%;
+  position: absolute;
+  top: -17.5%;
+  left: 0;
+}
+
+.parallax__layer-img.is-third {
+  top: -20%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .parallax__content {
+    padding: 2rem 1rem;
+    min-height: 50vh;
+  }
+}

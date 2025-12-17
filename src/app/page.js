@@ -16,9 +16,15 @@ import GalleryCallout from "@/components/GalleryCallout/GalleryCallout";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import Nav from "@/components/Nav/Nav";
 import FeaturesSection from "@/components/FeaturesSection";
-import Vr from "@/components/Vr/page";
+import ParallaxSection from "@/components/ParallaxSection/ParallaxSection";
 import Vrcard from "@/components/HorizontalScroll/HorizontalScroll";
 import { RefreshSection } from "@/components/RefreshSection/RefreshSection";
+import Challenges from "@/components/Challenges";
+import HowToClaim from "@/components/HowToClaim";
+import GameModes from "@/components/GameModes";
+import LoadOut from "@/components/LoadOut";
+import BuiltDifferent from "@/components/BuiltDifferent";
+import Tournament from "@/components/Tournament";
 
 let isInitialLoad = true;
 
@@ -62,11 +68,17 @@ export default function Home() {
       {showPreloader && <PreLoader />}
       <Hero showPreloader={showPreloader} />
       <WhatWeDo />
-      <ChampionSection />
-      <FeaturesSection />
-      <Vr />
+      <Tournament />
+      {/* <BuiltDifferent /> */}
+      {/* <FeaturesSection /> */}
+      <ParallaxSection />
       <Vrcard />
-      <RefreshSection/>
+      <GameModes />
+      <ChampionSection />
+      <LoadOut />
+      <Challenges />
+      <HowToClaim />
+      <RefreshSection />
       {/* <ClientReviewsSection />
       <GalleryCallout />
       <CTAWindow
@@ -75,7 +87,6 @@ export default function Home() {
         callout="Spaces that breathe with time"
         description="Our approach is guided by rhythm, proportion, and light, allowing every environment to grow more meaningful as it is lived in."
       /> */}
-      <ConditionalFooter />
     </>
   );
 }

@@ -9,41 +9,52 @@ export default function PreLoader() {
 
   return (
     <div className="loader">
-      <div className="marquee-wrapper">
-        <div className="marquee marquee-1">
-          <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+      {/* Split Text Container - Left Half */}
+      <div className="split-text-left">
+        <div className="marquee-container">
+          <div className="marquee marquee-1">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
+        </div>
+        <div className="marquee-container">
+          <div className="marquee marquee-2">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
+        </div>
+        <div className="marquee-container">
+          <div className="marquee marquee-3">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
         </div>
       </div>
 
-      <div className="marquee-wrapper">
-        <div className="marquee marquee-2">
-          <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+      {/* Split Text Container - Right Half (mirrored) */}
+      <div className="split-text-right">
+        <div className="marquee-container">
+          <div className="marquee marquee-1">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
+        </div>
+        <div className="marquee-container">
+          <div className="marquee marquee-2">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
+        </div>
+        <div className="marquee-container">
+          <div className="marquee marquee-3">
+            <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
+          </div>
         </div>
       </div>
 
-      <div className="marquee-wrapper">
-        <div className="marquee marquee-3">
-          <h1>SPAWN POINT SPAWN POINT SPAWN POINT SPAWN POINT </h1>
-        </div>
-      </div>
-
-      <div className="overlay">
-        <div className="blocker"></div>
-        <div className="blocker"></div>
-      </div>
-
-      <div className="intro-logo">
-        <div className="word" id="word-1">
-          <h1>
-            <span>Spawn</span>
-          </h1>
-        </div>
-        <div className="word" id="word-2">
-          <h1>Point</h1>
-        </div>
-      </div>
-
+      {/* Vertical Center Divider Line */}
       <div className="divider"></div>
+
+      {/* Overlay Blockers that wipe away (vertical split) */}
+      <div className="overlay">
+        <div className="blocker blocker-left"></div>
+        <div className="blocker blocker-right"></div>
+      </div>
     </div>
   );
 }

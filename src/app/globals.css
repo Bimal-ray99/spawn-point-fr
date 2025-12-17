@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import custom utilities */
+@import "../styles/utilities.css";
+
 :root {
   --base-100: rgb(242, 237, 230);
   --base-200: rgb(204, 200, 194);
@@ -63,21 +66,18 @@ img {
 h1 {
   font-size: 5rem;
   font-weight: 500;
-  letter-spacing: -0.25rem;
   line-height: 1.05;
 }
 
 h2 {
   font-size: 3.5rem;
   font-weight: 550;
-  letter-spacing: -0.15rem;
   line-height: 1.2;
 }
 
 h3 {
   font-size: 2.5rem;
   font-weight: 500;
-  letter-spacing: -0.075rem;
   line-height: 1.2;
 }
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { ReactLenis } from "lenis/react";
 import { ViewTransitions } from "next-view-transitions";
+import { Toaster } from "sonner";
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -55,6 +56,7 @@ export default function ClientLayout({ children }) {
     <ViewTransitions>
       <ReactLenis root options={scrollSettings}>
         {children}
+        <Toaster richColors position="top-center" />
       </ReactLenis>
     </ViewTransitions>
   );

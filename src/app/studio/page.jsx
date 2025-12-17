@@ -26,7 +26,7 @@ const page = () => {
             </div>
             <div className="studio-hero-col">
               <Copy delay={0.85}>
-                <h2>
+                <h2 className="heading-subsection">
                   Our studio exists to create spaces that feel honest, lived in,
                   and quietly transformative. Every project begins with
                   listening and ends with an environment.

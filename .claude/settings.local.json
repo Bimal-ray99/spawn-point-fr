@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npm view:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm audit:*)"
     ],
     "deny": [],
     "ask": []

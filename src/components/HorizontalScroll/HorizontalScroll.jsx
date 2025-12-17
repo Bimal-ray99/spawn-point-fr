@@ -7,19 +7,13 @@ const cardData = [
   {
     id: 1,
     title: "TOURNAMENTS",
-    subtitle: "Vr gaming",
+    subtitle: "Vr Racing",
     type: "keyholes",
     bgColor: "#FF69B4",
     hoverBgColor: "#FF1493",
     bgImage:
       "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67e0e2b1f6e5dcdd9b6c8e19_1.png",
-    details: [
-      "Visual identity",
-      "Creative direction",
-      "Style matching",
-      "Asset direction (photo, video, 3D)",
-      "Concept refinement",
-    ],
+    details: ["THRUSTMASTER T300 + PSVR2"],
     decorativeImages: [
       "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67dff0cd647cc1c2a0fa12b0_42.avif",
       "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67dff0cb495059a21b79d822_41.avif",
@@ -30,19 +24,13 @@ const cardData = [
   {
     id: 2,
     title: "ARCADE",
-    subtitle: "IB cricket",
+    subtitle: "Vr/Mr Action",
     type: "mockups",
     bgColor: "#A8B5A0",
     hoverBgColor: "#8A9B82",
     bgImage:
       "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67e0e2b221e5dd560faa83d8_2.png",
-    details: [
-      "Full website design",
-      "App Design",
-      "Visual storytelling",
-      "Bold visuals",
-      "Wireframes & user flows",
-    ],
+    details: ["PS VR 2 + GUNSTOCKS + HAPTIC VEST"],
     slideImages: [
       {
         src: "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67dff0cb76b1b2b8ec9e8fe6_8.avif",
@@ -58,13 +46,13 @@ const cardData = [
   {
     id: 3,
     title: "VR ZONE",
-    subtitle: "Ar gaming",
+    subtitle: "Vr Sports",
     type: "code",
     bgColor: "#4A4458",
     hoverBgColor: "#2C2532",
     bgImage:
       "https://cdn.prod.website-files.com/67a72d4537cb6f129b978175/67e0e2b288c18ced0c07ffc3_3.png",
-    details: ["Webflow", "GSAP", "Three.js / WebGL", "Shopify", "AND MORE"],
+    details: ["META QUEST + CRICKET BAT"],
     hoverImage: "/crd1.png",
   },
 ];
@@ -122,7 +110,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 flex items-center justify-center z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 {card.decorativeImages.map((src, index) => (
@@ -158,7 +147,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 {/* First diagonal image - top left to bottom right */}
@@ -208,7 +198,8 @@ export default function HorizontalScroll() {
               <div
                 className={clsx(
                   "absolute inset-0 overflow-hidden z-5 transition-opacity duration-700",
-                  hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                  "opacity-100", // Always visible on mobile
+                  hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                 )}
               >
                 <div className="w-full h-full p-4 font-mono text-xs leading-relaxed">
@@ -250,7 +241,8 @@ export default function HorizontalScroll() {
                       <div
                         className={clsx(
                           "par-sm white text-white text-base md:text-lg transition-all duration-700",
-                          hoveredCard === card.id ? "opacity-100" : "opacity-0"
+                          "opacity-100", // Always visible on mobile
+                          hoveredCard === card.id ? "md:opacity-100" : "md:opacity-0" // Hover effect on desktop only
                         )}
                         style={{
                           transform:

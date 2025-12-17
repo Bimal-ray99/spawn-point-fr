@@ -47,7 +47,7 @@ const AnimatedButton = ({
       if (!buttonRef.current || !textRef.current) return;
 
       if (!animate) {
-        gsap.set(buttonRef.current, { scale: 1 });
+        gsap.set(buttonRef.current, { scale: 1, skewX: -8 });
         gsap.set(circleRef.current, { scale: 1, opacity: 1 });
         gsap.set(iconRef.current, { opacity: 1, x: 0 });
         return;
@@ -77,6 +77,7 @@ const AnimatedButton = ({
 
         tl.to(buttonRef.current, {
           scale: 1,
+          skewX: -8,
           duration: 0.5,
           ease: "back.out(1.7)",
         });
