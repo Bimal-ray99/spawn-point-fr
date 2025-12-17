@@ -62,7 +62,7 @@ export default function Hero({ showPreloader }) {
                 <Image
                   src="/logo.png"
                   alt="Spawn Point"
-                  width={800}
+                  width={900}
                   height={200}
                   priority
                   className="w-auto h-auto max-w-full object-contain"
